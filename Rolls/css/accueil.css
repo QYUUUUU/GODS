@@ -1,0 +1,249 @@
+.card {
+    width: 1200px;
+    height: 1700px;
+    background-image: url("../img/yes.png");
+    background-repeat: no-repeat;
+  }
+  .card-body {
+    background-image: url("../img/background.png");
+    background-repeat: no-repeat;
+  }
+
+  .nomage {
+    margin-top: 200px;
+  }
+  #nom {
+    height: 1.5rem;
+    width: 150px;
+    background-color: unset;
+    border: unset;
+    border-bottom: solid 1px black;
+  }
+  #age {
+    text-align: right;
+    height: 1.5rem;
+    width: 150px;
+    background-color: unset;
+    border: unset;
+    border-bottom: solid 1px black;
+  }
+  .age {
+    justify-content: right;
+    margin-left: 300px;
+  }
+
+  #genre {
+    height: 1.5rem;
+    width: 235px;
+    background-color: unset;
+    border: unset;
+    border-bottom: solid 1px black;
+  }
+  #instinct {
+    text-align: right;
+    height: 1.5rem;
+    width: 215x;
+    background-color: unset;
+    border: unset;
+    border-bottom: solid 1px black;
+  }
+  .instinct {
+    justify-content: right;
+    margin-left: -95px;
+  }
+
+  #signeastro {
+    height: 1.5rem;
+    width: 253px;
+    background-color: unset;
+    border: unset;
+    border-bottom: solid 1px black;
+  }
+  #origine {
+    text-align: right;
+    height: 1.5rem;
+    width: 320px;
+    background-color: unset;
+    border: unset;
+    border-bottom: solid 1px black;
+  }
+  .origine {
+    justify-content: right;
+    margin-left: -295px;
+  }
+
+  .reputexp {
+    margin-top: 20px;
+  }
+
+  .experience {
+    justify-content: right;
+    margin-left: -50px;
+  }
+  .exp {
+    justify-content: right;
+    margin-left: -210px;
+  }
+
+  #depensee {
+    height: 1.5rem;
+    width: 40px;
+    background-color: unset;
+    border: unset;
+    border-bottom: solid 1px black;
+  }
+  #totale {
+    height: 1.5rem;
+    width: 40px;
+    background-color: unset;
+    border: unset;
+    border-bottom: solid 1px black;
+  }
+  .pointsexp {
+    margin-top: -20px;
+  }
+
+  .caracteristiques {
+    margin-top: 40px;
+  }
+
+  .losange {
+    height: 20px;
+    width: 20px;
+  }
+  .circle {
+    height: 20px;
+    width: 20px;
+  }
+  .losangecarac{
+    height: 17px;
+    width: 17px;
+  }
+  .form-control {
+    border-radius: unset;
+    height: 1.5rem;
+    width: 40px;
+    background-color: unset;
+    border: unset;
+    border-bottom: solid 1px black;
+  }
+  .malus {
+    height: 1.5rem;
+    width: 40px;
+    background-color: unset;
+    border: unset;
+    border-bottom: solid 1px black;
+  }
+
+  .infosymbole {
+    margin-top: 95px;
+    margin-right: -60px;
+  }
+  .humainanimal {
+    margin-top: -45px;
+  }
+
+  .animal {
+    margin-left: 100px;
+  }
+  .arts {
+    margin-top: 5px;
+  }
+  .lilhigher {
+    margin-top: -7px;
+  }
+  .modal-content{
+    width: 983px;
+    height:501px;
+    background-color: unset;
+    background-image: url("../img/modale.png");
+    background-repeat: no-repeat;
+    border: unset;
+  }
+  .modal-body{
+    border: unset;
+    padding-left:80px;
+  }
+  .modal-footer{
+    border: unset;
+  }
+  .modal-header{
+    border: unset;
+  }
+  .modal-dialog{
+    max-width: 983px;
+  }
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover, 
+  input:-webkit-autofill:focus, 
+  input:-webkit-autofill:active{
+      -webkit-box-shadow: 0 0 0 30px white inset !important;
+  }
+
+  .bleres{
+    margin-top: 7px;
+  }
+  .reserves{
+    margin-left: 150px;
+  }
+
+ .blessurestype{
+  margin-right: -150px;
+ }
+
+ .totheright{
+  margin-left: 30px;
+ }
+
+ #original-content {
+    position: relative;
+  }
+
+.content{
+    position: relative;
+    height: 80vh;
+    width: 80vw;
+    overflow: hidden;
+}
+  
+  #overlay {
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    display: none; /* Hide by default */
+  }
+  
+  #overlay.show {
+    display: block; /* Show when the class is toggled */
+  }
+  
+  #overlay .content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-height: 90vh;
+    overflow-y: auto;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  }
+
+  .ui-controls {
+    position: absolute;
+    top: 25%;
+    left: 25%;
+    z-index: 1;
+    /* other styles */
+  }
+
+  canvas {
+    position: relative;
+    z-index: 0;
+    /* other styles */
+  }
