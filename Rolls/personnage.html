@@ -817,7 +817,49 @@
   <main>
     <div class="content">
 		  <div id="ThreeJS" style="position: absolute; left:0px; top:0px"></div>
-      <div class="ui-controls">
+      <div id="ui-controls" class="ui-controls">
+        <select name="caracteristique" id="caracteristique">
+          <option value="puissance">Puissance</option>
+          <option value="precision">Précision</option>
+          <option value="connaissance">Connaissance</option>
+          <option value="volonte">Volonté</option>
+          <option value="resistance">Résistance</option>
+          <option value="reflexes">Réflexes</option>
+          <option value="perception">Perception</option>
+          <option value="empathie">Empathie</option>
+        </select>
+        <select name="competence" id="competence">
+          <option value="arts">Arts</option>
+          <option value="animalisme">Animalisme</option>
+          <option value="cite">Cité</option>
+          <option value="faune">Faune</option>
+          <option value="civilisations">Civilisations</option>
+          <option value="montures">Montures</option>
+          <option value="relationnel">Relationnel</option>
+          <option value="pistage">Pistage</option>
+          <option value="soins">Soins</option>
+          <option value="territoire">Territoire</option>
+          <option value="adresse">Adresse</option>
+          <option value="athletisme">Athlétisme</option>
+          <option value="armurerie">Armurerie</option>
+          <option value="discretion">Discrétion</option>
+          <option value="artisanat">Artisanat</option>
+          <option value="flore">Flore</option>
+          <option value="mecanisme">Mécanisme</option>
+          <option value="vigilance">Vigilance</option>
+          <option value="runes">Runes</option>
+          <option value="voyage">Voyage</option>
+          <option value="bouclier">Bouclier</option>
+          <option value="eclats">Eclats</option>
+          <option value="cac">CAC</option>
+          <option value="lunes">Lunes</option>
+          <option value="lancer">Lancer</option>
+          <option value="mythes">Mythes</option>
+          <option value="melee">Mêlée</option>
+          <option value="pantheons">Pantheons</option>
+          <option value="tir">Tir</option>
+          <option value="rituels">Rituels</option>
+        </select>
         <div class="score">Score: <span id="score-result"></span></div>
         <ul class="tips"></ul>
         <button id="roll-btn">Throw the dice</button>
@@ -826,13 +868,11 @@
   </main>
 </div>
 </body>
-
-
-
-<script src="./js/personnage.js"></script>
-       
 </html>
 
-<script src="./js/sidebar.js"></script>
+
+<script type="module" src="./js/personnage.js"></script>
 
 <script type="module" src="./js/main.js"></script>
+
+<script src="./js/sidebar.js"></script>

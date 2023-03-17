@@ -1,4 +1,9 @@
+var caracteristiqueValue;
+var competenceValue;
+export function buildPage() {
+
 const losanges = document.querySelectorAll('.losange');
+async function processLosanges() {
 losanges.forEach(losange => {
   losange.addEventListener('click', function() {
     var id = this.id;
@@ -14,7 +19,8 @@ losanges.forEach(losange => {
     }
   });
 });
-
+}
+processLosanges();
 
 // Variables globales pour stocker les notes sélectionnées
 var puissance = 0;
@@ -58,6 +64,8 @@ function selectNote(caracteristique, note) {
 }
 
 const losangescomp = document.querySelectorAll('.losangecarac');
+
+async function processLosangescarac() {
 losangescomp.forEach(losange => {
   losange.addEventListener('click', function() {
     var id = this.id;
@@ -78,8 +86,6 @@ losangescomp.forEach(losange => {
         }
       }
     }else{
-
-    
       selectNoteCompetence(competence, note);
       const currentNote = parseInt(this.id.slice(-1));
       for (let i = 1; i <= currentNote; i++) {
@@ -103,9 +109,11 @@ losangescomp.forEach(losange => {
     }
   });
 });
+}
+processLosangescarac();
 var arts = 0;
 var animalisme = 0;
-var cite = 0;
+var cite = 0; 
 var faune = 0;
 var civilisations = 0;
 var montures = 0;
@@ -230,11 +238,11 @@ function selectNoteCompetence(competence, note) {
   updatePersonnageField(1, competence, note)
 }
 
-const form = document.querySelector("form");
-form.addEventListener("submit", function(event) {
-  event.preventDefault();
-  const selectedVariable = document.querySelector("#variable").value;
-  const selectedVariable2 = document.querySelector("#variable2").value;
+const caracSelector = document.getElementById("caracteristique");
+caracSelector.addEventListener("change", function(event) {
+  updateCaracteristique();
+});
+function updateCaracteristique(){
   const variablesMap = {
     puissance: puissance,
     precicion: precicion,
@@ -245,7 +253,17 @@ form.addEventListener("submit", function(event) {
     perception: perception,
     empathie: empathie
   };
-  const variable = variablesMap[selectedVariable];
+  caracteristiqueValue = variablesMap[caracSelector.value];
+  caracteristique = caracteristiqueValue;
+}
+
+
+const compSelector = document.getElementById("competence");
+compSelector.addEventListener("change", function(event) {
+  updateCompetence();
+});
+
+function updateCompetence(){
   const variables2Map = {
     arts: arts,
     animalisme: animalisme,
@@ -278,8 +296,12 @@ form.addEventListener("submit", function(event) {
     tir: tir,
     rituels: rituels
   };
-  const variable2 = variables2Map[selectedVariable2];
-});
+  competenceValue = variables2Map[compSelector.value];
+  competence = competenceValue;
+}
+
+setInterval(updateCompetence, 3000);
+setInterval(updateCaracteristique, 3000);
 
   const inputFields = document.querySelectorAll("input");
   inputFields.forEach(inputField => {
@@ -510,3 +532,9 @@ getPersonnage(id)
   .catch((error) => {
     console.error(error);
   });
+
+  return Promise.resolve();
+}
+console.log(caracteristiqueValue);
+export var caracteristique = caracteristiqueValue;
+export var competence = competenceValue;

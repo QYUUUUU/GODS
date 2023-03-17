@@ -1,7 +1,80 @@
 import { DiceManager, DiceD10 } from '../node_modules/threejs-dice/lib/dice.js';
+import { buildPage, caracteristique, competence } from './personnage.js';
+//Config de lancement de dés
+buildPage();
+
+var number;
+var rethrows;
+
+function calculate(){
+    number = caracteristique;
+    rethrows = 0;
+
+    switch(competence){
+        case 0:
+            break;
+        case 1:
+            number++;
+            break
+        case 2:
+            number++;
+            rethrows = 1;
+            break;
+        case 3:
+            number = number + 2;
+            rethrows = 1;
+            break;
+        case 4:
+            number = number + 2;
+            rethrows = 2;
+            break;
+        case 5:
+            number = number + 3;
+            rethrows = 2;
+            break;
+        case 6:
+            number = number + 3;
+            rethrows = 3;
+            break;
+        default:
+            // Handle any unexpected values
+            console.log('Unexpected value for competence:', competence, " and caracteristique");
+            break;
+        }
+
+
+
+    const boite = document.getElementById("ui-controls");
+
+    const input = document.getElementById("rethrowNumber");
+
+   
+      
+      // Vérifier si le champ input existe déjà
+      if (input) {
+        input.max = rethrows;
+        input.value = rethrows;
+      } else {
+        // Créer dynamiquement un nouveau champ input
+        const input = document.createElement("input");
+        input.type = "number";
+        input.max = rethrows;
+        input.value = rethrows;
+        input.id = "rethrowNumber";
+        boite.appendChild(input); // Ajouter le champ input à la fin du formulaire
+        input.addEventListener("change",()=>{
+            if(input.value>rethrows){
+                input.value=rethrows;
+            }
+        });
+    
+      }
+
+    return [number,rethrows];
+}
+
 
 // MAIN
-// standard global variables
 var container, scene, camera, renderer, controls, stats, world, dice = [];
 
 init();
@@ -9,6 +82,7 @@ init();
 // FUNCTIONS
 function init()
 {
+    onWindowResize();
 	// SCENE
 	scene = new THREE.Scene();
 	// CAMERA
@@ -16,7 +90,7 @@ function init()
 	var VIEW_ANGLE = 45, ASPECT = SCREEN_WIDTH / SCREEN_HEIGHT, NEAR = 0.01, FAR = 20000;
 	camera = new THREE.PerspectiveCamera( VIEW_ANGLE, ASPECT, NEAR, FAR);
 	scene.add(camera);
-	camera.position.set(0,30,30);
+	camera.position.set(10,50,-0);
 	// RENDERER
     renderer = new THREE.WebGLRenderer( {antialias:true} );
 	renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -25,26 +99,23 @@ function init()
 
 	container = document.getElementById( 'ThreeJS' );
 	container.appendChild( renderer.domElement );
+
 	// EVENTS
 	// CONTROLS
 	controls = new THREE.OrbitControls( camera, renderer.domElement );
 	// STATS
 	stats = new Stats();
-	stats.domElement.style.position = 'absolute';
-	stats.domElement.style.bottom = '0px';
-	stats.domElement.style.zIndex = 100;
-	container.appendChild( stats.domElement );
 
-	let ambient = new THREE.AmbientLight('#ffffff', 0.3);
+	let ambient = new THREE.AmbientLight('#ffffff', 0.5);
 	scene.add(ambient);
 
     let directionalLight = new THREE.DirectionalLight('#ffffff', 0.5);
     directionalLight.position.x = -1000;
-    directionalLight.position.y = 1000;
+    directionalLight.position.y = 0;
     directionalLight.position.z = 1000;
     scene.add(directionalLight);
 
-    let light = new THREE.SpotLight(0xefdfd5, 1.3);
+    let light = new THREE.SpotLight(0xefdfd5, 0.5);
     light.position.y = 100;
     light.target.position.set(0, 0, 0);
     light.castShadow = true;
@@ -56,7 +127,7 @@ function init()
 
 
 	// FLOOR
-	var floorMaterial = new THREE.MeshPhongMaterial( { color: '#00000f', side: THREE.DoubleSide } );
+	var floorMaterial = new THREE.MeshPhongMaterial( { color: '#232323', side: THREE.DoubleSide } );
 	var floorGeometry = new THREE.PlaneGeometry(30, 30, 10, 10);
 	var floor = new THREE.Mesh(floorGeometry, floorMaterial);
 	floor.receiveShadow  = true;
@@ -102,7 +173,7 @@ function init()
 	////////////
     world = new CANNON.World();
 
-    world.gravity.set(0, -9.82 * 20, 0);
+    world.gravity.set(0, -9.82 * 30, 0);
     world.broadphase = new CANNON.NaiveBroadphase();
     world.solver.iterations = 16;
     DiceManager.setWorld(world);
@@ -112,16 +183,44 @@ function init()
     floorBody.quaternion.setFromAxisAngle(new CANNON.Vec3(1, 0, 0), -Math.PI / 2);
     world.add(floorBody);
 
-    //Walls
+    function randomDiceThrow(rethrow = false) {
+        //Récuperer le nombre de dés à lancer
+        var throws = calculate();
+        
+        var numberRethrow = throws[1];
+        var numberThrow = rethrow ? numberRethrow : throws[0];
+        
+        // Vider tous les dés de la scène
+       
+        dice.forEach(die => {
+            scene.remove(die.getObject());
+            if (die.getObject().body) {
+                world.remove(die.getObject().body);
+            }
+        });
+        dice = [];
 
-    var colors = '#ffffff';
-    for (var i = 0; i < 5; i++) {
-        var die = new DiceD10({size: 1.5, backColor: colors});
-        scene.add(die.getObject());
-        dice.push(die);
-    }
+        const rerollbtn = document.getElementById("reroll-btn");
+        if(rerollbtn){
+            rerollbtn.remove();
+        }
+        if(rethrow){
+            const input = document.getElementById("rethrowNumber");
+            input.remove();
+        }else{
+            const boite = document.getElementById("ui-controls");
+            const button = document.createElement("button");
+            button.id = "reroll-btn";
+            button.textContent="Rethrow";
+            boite.appendChild(button); // Ajouter le champ input à la fin du formulaire
+            button.addEventListener("click", () => randomDiceThrow(true));
+        }
 
-    function randomDiceThrow() {
+        for (var i = 0; i < numberThrow; i++) {
+            var die = new DiceD10({size: 1.5, backColor: "#ffffff"});
+            scene.add(die.getObject());
+            dice.push(die);
+        }
         var diceValues = [];
     
         for (var i = 0; i < dice.length; i++) {
@@ -139,14 +238,14 @@ function init()
             let value = Math.floor(Math.random() * 10) + 1; // generate a random integer between 1 and 10
             diceValues.push({dice: dice[i], value: value});
         }
-    
+        loggingdices(diceValues);
         DiceManager.prepareValues(diceValues);
+        
     }
-
-    setInterval(randomDiceThrow, 3000);
-    randomDiceThrow();
-
     requestAnimationFrame( animate );
+ 
+    const roll = document.getElementById("roll-btn");
+    roll.addEventListener("click", () => randomDiceThrow());
 }
 
 function animate()
@@ -169,7 +268,6 @@ function updatePhysics() {
 
 function update()
 {
-
 	controls.update();
 	stats.update();
 }
@@ -179,3 +277,42 @@ function render()
 	renderer.render( scene, camera );
 }
 
+function loggingdices(){
+
+}
+
+
+
+const caracteristiquePicker = document.getElementById("caracteristique");
+const competencePicker = document.getElementById("competence");
+
+caracteristiquePicker.addEventListener("change",()=>{
+    const rerollbtn = document.getElementById("reroll-btn");
+        if(rerollbtn){
+            rerollbtn.remove();
+        }
+    const input = document.getElementById("rethrowNumber");
+    if(input){
+        input.remove();
+    }
+});
+
+competencePicker.addEventListener("change",()=>{
+    const rerollbtn = document.getElementById("reroll-btn");
+        if(rerollbtn){
+            rerollbtn.remove();
+        }
+    const input = document.getElementById("rethrowNumber");
+    if(input){
+        input.remove();
+    }
+});
+
+function onWindowResize() {
+    // Mettre à jour la taille du canvas
+    const container = document.getElementById('content');
+    const width = container.clientWidth;
+    const height = container.clientHeight;
+    renderer.setSize(width, height);
+}
+window.addEventListener('resize', onWindowResize, false);
