@@ -6,7 +6,7 @@ buildPage();
 var number;
 var rethrows;
 
-function calculate(){
+function calculate(rethrow){
     number = caracteristique;
     rethrows = 0;
 
@@ -50,11 +50,10 @@ function calculate(){
 
    
       
-      // Vérifier si le champ input existe déjà
-      if (input) {
-        input.max = rethrows;
-        input.value = rethrows;
-      } else {
+    // Vérifier si le champ input existe déjà
+    if (input) {
+        rethrows = input.value;
+    } else {
         // Créer dynamiquement un nouveau champ input
         const input = document.createElement("input");
         input.type = "number";
@@ -68,7 +67,7 @@ function calculate(){
             }
         });
     
-      }
+    }
 
     return [number,rethrows];
 }
@@ -82,7 +81,6 @@ init();
 // FUNCTIONS
 function init()
 {
-    onWindowResize();
 	// SCENE
 	scene = new THREE.Scene();
 	// CAMERA
@@ -90,9 +88,10 @@ function init()
 	var VIEW_ANGLE = 45, ASPECT = SCREEN_WIDTH / SCREEN_HEIGHT, NEAR = 0.01, FAR = 20000;
 	camera = new THREE.PerspectiveCamera( VIEW_ANGLE, ASPECT, NEAR, FAR);
 	scene.add(camera);
-	camera.position.set(10,50,-0);
+	camera.position.set(60,60,-0);
 	// RENDERER
-    renderer = new THREE.WebGLRenderer( {antialias:true} );
+    renderer = new THREE.WebGLRenderer( {antialias:true, alpha: true} );
+    renderer.setClearColor( 0x000000, 0 ); // the default
 	renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
@@ -133,42 +132,7 @@ function init()
 	floor.receiveShadow  = true;
 	floor.rotation.x = Math.PI / 2;
 	scene.add(floor);
-    //WALLS
-    // WALLS
-    var wallMaterial = new THREE.MeshPhongMaterial( { color: '#ffffff', side: THREE.DoubleSide, transparent: true, opacity: 0 } );
-    var wallGeometry1 = new THREE.PlaneGeometry(30, 10, 10, 10);
-    var wall1 = new THREE.Mesh(wallGeometry1, wallMaterial);
-    wall1.position.z = 15;
-    wall1.receiveShadow = true;
-    scene.add(wall1);
-
-    var wallGeometry2 = new THREE.PlaneGeometry(30, 10, 10, 10);
-    var wall2 = new THREE.Mesh(wallGeometry2, wallMaterial);
-    wall2.position.z = -15;
-    wall2.receiveShadow = true;
-    scene.add(wall2);
-
-    var wallGeometry3 = new THREE.PlaneGeometry(10, 10, 10, 10);
-    var wall3 = new THREE.Mesh(wallGeometry3, wallMaterial);
-    wall3.position.x = 15;
-    wall3.rotation.y = Math.PI / 2;
-    wall3.receiveShadow = true;
-    scene.add(wall3);
-
-    var wallGeometry4 = new THREE.PlaneGeometry(10, 10, 10, 10);
-    var wall4 = new THREE.Mesh(wallGeometry4, wallMaterial);
-    wall4.position.x = -15;
-    wall4.rotation.y = Math.PI / 2;
-    wall4.receiveShadow = true;
-    scene.add(wall4);
-	// SKYBOX/FOG
-	var skyBoxGeometry = new THREE.CubeGeometry( 10000, 10000, 10000 );
-	var skyBoxMaterial = new THREE.MeshPhongMaterial( { color: 0x9999ff, side: THREE.BackSide } );
-	var skyBox = new THREE.Mesh( skyBoxGeometry, skyBoxMaterial );
-	// scene.add(skyBox);
-	scene.fog = new THREE.FogExp2( 0x9999ff, 0.00025 );
-
-	////////////
+   
 	// CUSTOM //
 	////////////
     world = new CANNON.World();
@@ -185,7 +149,7 @@ function init()
 
     function randomDiceThrow(rethrow = false) {
         //Récuperer le nombre de dés à lancer
-        var throws = calculate();
+        var throws = calculate(rethrow);
         
         var numberRethrow = throws[1];
         var numberThrow = rethrow ? numberRethrow : throws[0];
@@ -246,6 +210,7 @@ function init()
  
     const roll = document.getElementById("roll-btn");
     roll.addEventListener("click", () => randomDiceThrow());
+
 }
 
 function animate()
@@ -308,11 +273,3 @@ competencePicker.addEventListener("change",()=>{
     }
 });
 
-function onWindowResize() {
-    // Mettre à jour la taille du canvas
-    const container = document.getElementById('content');
-    const width = container.clientWidth;
-    const height = container.clientHeight;
-    renderer.setSize(width, height);
-}
-window.addEventListener('resize', onWindowResize, false);

@@ -1,26 +1,60 @@
 var caracteristiqueValue;
 var competenceValue;
-export function buildPage() {
 
+export function buildPage() {
 const losanges = document.querySelectorAll('.losange');
 async function processLosanges() {
-losanges.forEach(losange => {
-  losange.addEventListener('click', function() {
-    var id = this.id;
-    var caracteristique = id.substring(0, id.indexOf("losange"));
-    var note = parseInt(id.charAt(id.length - 1));
-    selectNote(caracteristique, note);
-    const currentNote = parseInt(this.id.slice(-1));
-    for (let i = 1; i <= currentNote; i++) {
-      document.getElementById(this.id.slice(0, -1) + i).src = './img/losangered.png';
-    }
-    for (let i = currentNote + 1; i <= 5; i++) {
-      document.getElementById(this.id.slice(0, -1) + i).src = './img/losange.png';
-    }
+  losanges.forEach(losange => {
+    losange.addEventListener('click', function() {
+      var id = this.id;
+      var caracteristique = id.substring(0, id.indexOf("losange"));
+      var note = parseInt(id.charAt(id.length - 1));
+      selectNote(caracteristique, note);
+      const currentNote = parseInt(this.id.slice(-1));
+      for (let i = 1; i <= currentNote; i++) {
+        document.getElementById(this.id.slice(0, -1) + i).src = './img/losangered.png';
+      }
+      for (let i = currentNote + 1; i <= 5; i++) {
+        document.getElementById(this.id.slice(0, -1) + i).src = './img/losange.png';
+      }
+    });
   });
-});
 }
 processLosanges();
+
+var legere = 0;
+var grave = 0;
+var mortelle = 0;
+function selectBlessure(blessure, note) {
+  switch (blessure) {
+    case "legere":
+      legere = note;
+      break;
+    case "grave":
+      grave = note;
+      break;
+    case "mortelle":
+      mortelle = note;
+      break;
+  }
+  updatePersonnageField(1, "blessure"+blessure, note);
+}
+
+
+
+var effort = 0;
+var sangfroid = 0;
+function selectReserve(reserve, note) {
+  switch (reserve) {
+    case "effort":
+      effort = note;
+      break;
+    case "grave":
+      sangfroid = note;
+      break;
+  }
+  updatePersonnageField(1, reserve, note);
+}
 
 // Variables globales pour stocker les notes sélectionnées
 var puissance = 0;
@@ -66,49 +100,49 @@ function selectNote(caracteristique, note) {
 const losangescomp = document.querySelectorAll('.losangecarac');
 
 async function processLosangescarac() {
-losangescomp.forEach(losange => {
-  losange.addEventListener('click', function() {
-    var id = this.id;
-    var competence = id.substring(0, id.indexOf("losange"));
-    var note = parseInt(id.charAt(id.length - 1));
-    var thisImage = this.src;
-    thisImage = thisImage.split("/").pop().split("\\").pop();
-    if(note == 1 && thisImage=="losangered.png"){
-      selectNoteCompetence(competence, 0);
-      this.src = "./img/losange.png";
-      for (let i = 2; i <= 6; i++) {
-        var image = document.getElementById(this.id.slice(0, -1) + i).src;
-        image = image.split("/").pop().split("\\").pop();
-        if(image == "losangered.png" || image == "losange.png"){
-          document.getElementById(this.id.slice(0, -1) + i).src = './img/losange.png';
-        }else{
-          document.getElementById(this.id.slice(0, -1) + i).src = './img/circle.png';
+  losangescomp.forEach(losange => {
+    losange.addEventListener('click', function() {
+      var id = this.id;
+      var competence = id.substring(0, id.indexOf("losange"));
+      var note = parseInt(id.charAt(id.length - 1));
+      var thisImage = this.src;
+      thisImage = thisImage.split("/").pop().split("\\").pop();
+      if(note == 1 && thisImage=="losangered.png"){
+        selectNoteCompetence(competence, 0);
+        this.src = "./img/losange.png";
+        for (let i = 2; i <= 6; i++) {
+          var image = document.getElementById(this.id.slice(0, -1) + i).src;
+          image = image.split("/").pop().split("\\").pop();
+          if(image == "losangered.png" || image == "losange.png"){
+            document.getElementById(this.id.slice(0, -1) + i).src = './img/losange.png';
+          }else{
+            document.getElementById(this.id.slice(0, -1) + i).src = './img/circle.png';
+          }
+        }
+      }else{
+        selectNoteCompetence(competence, note);
+        const currentNote = parseInt(this.id.slice(-1));
+        for (let i = 1; i <= currentNote; i++) {
+          var image = document.getElementById(this.id.slice(0, -1) + i).src;
+          image = image.split("/").pop().split("\\").pop();
+          if(image == "losangered.png" || image == "losange.png"){
+            document.getElementById(this.id.slice(0, -1) + i).src = './img/losangered.png';
+          }else{
+            document.getElementById(this.id.slice(0, -1) + i).src = './img/circlered.png';
+          }
+        }
+        for (let i = currentNote + 1; i <= 6; i++) {
+          var image = document.getElementById(this.id.slice(0, -1) + i).src;
+          image = image.split("/").pop().split("\\").pop();
+          if(image == "losangered.png" || image == "losange.png"){
+            document.getElementById(this.id.slice(0, -1) + i).src = './img/losange.png';
+          }else{
+            document.getElementById(this.id.slice(0, -1) + i).src = './img/circle.png';
+          }
         }
       }
-    }else{
-      selectNoteCompetence(competence, note);
-      const currentNote = parseInt(this.id.slice(-1));
-      for (let i = 1; i <= currentNote; i++) {
-        var image = document.getElementById(this.id.slice(0, -1) + i).src;
-        image = image.split("/").pop().split("\\").pop();
-        if(image == "losangered.png" || image == "losange.png"){
-          document.getElementById(this.id.slice(0, -1) + i).src = './img/losangered.png';
-        }else{
-          document.getElementById(this.id.slice(0, -1) + i).src = './img/circlered.png';
-        }
-      }
-      for (let i = currentNote + 1; i <= 6; i++) {
-        var image = document.getElementById(this.id.slice(0, -1) + i).src;
-        image = image.split("/").pop().split("\\").pop();
-        if(image == "losangered.png" || image == "losange.png"){
-          document.getElementById(this.id.slice(0, -1) + i).src = './img/losange.png';
-        }else{
-          document.getElementById(this.id.slice(0, -1) + i).src = './img/circle.png';
-        }
-      }
-    }
+    });
   });
-});
 }
 processLosangescarac();
 var arts = 0;
@@ -526,15 +560,183 @@ getPersonnage(id)
     if (data[0].montures !== 0) {
       document.getElementById('montureslosange'+data[0].montures).click();
     }
-      
-    
+
+
+    //  
+    //Gérer les réserves :
+    //
+    const effortBox = document.getElementById('effort');
+    var maxeffort = data[0].maxeffort;
+    console.log(maxeffort);
+    for (let i = 1; i <= maxeffort; i++) {
+      const effort = document.createElement("img");
+      effort.id="effortcircle"+i;
+      effort.classList.add("circlereserve");
+      effort.src="./img/circle.png";
+      effortBox.appendChild(effort);
+    }
+
+    const sangfroidBox = document.getElementById('sangfroid');
+    var maxsangfroid = data[0].maxsangfroid;
+    for (let i = 1; i <= maxsangfroid; i++) {
+      const sangfroid = document.createElement("img");
+      sangfroid.id="sangfroidcircle"+i;
+      sangfroid.classList.add("circlereserve");
+      sangfroid.src="./img/circle.png";
+      sangfroidBox.appendChild(sangfroid);
+    }
+
+    const circleseffort = document.querySelectorAll('.circlereserve');
+    circleseffort.forEach(circle => {
+      circle.addEventListener('click', function() {
+        var id = this.id;
+        var reserve = id.substring(0, id.indexOf("circle"));
+        const match = id.match(/\d+$/);
+        var note = match ? parseInt(match[0]) : 0;
+        var thisImage = this.src;
+        thisImage = thisImage.split("/").pop().split("\\").pop();
+
+        if(reserve=="effort"){
+          var maxreserve = maxeffort;
+        }
+
+        if(reserve=="sangfroid"){
+          var maxreserve = maxsangfroid;
+        }
+
+        if(thisImage == "circlered.png" && note =="1"){
+          this.src="./img/circle.png";
+          selectReserve(reserve,0);
+          for (let i = note + 1; i <= maxreserve; i++) {
+            var tempID= id.replace(/\d+/g, "")+i;
+            document.getElementById(tempID).src = './img/circle.png';
+          }
+        }else if(thisImage == "circle.png" && note =="1"){
+          this.src="./img/circlered.png";
+          selectReserve(reserve,note);
+          for (let i = note + 1; i <= maxreserve; i++) {
+            var tempID= id.replace(/\d+/g, "")+i;
+            document.getElementById(tempID).src = './img/circle.png';
+          }
+        }else{
+          selectReserve(reserve,note);
+          for (let i = 1; i <= note; i++) {
+            var tempID= id.replace(/\d+/g, "")+i;
+            document.getElementById(tempID).src = './img/circlered.png';
+          }
+          for (let i = note + 1; i <= maxreserve; i++) {
+            var tempID= id.replace(/\d+/g, "")+i;
+            document.getElementById(tempID).src = './img/circle.png';
+          }
+        }
+      });
+    });
+
+    if (data[0].effort !== 0) {
+      document.getElementById('effortcircle'+data[0].effort).click();
+    }
+
+    if (data[0].sangfroid !== 0) {
+      document.getElementById('sangfroidcircle'+data[0].sangfroid).click();
+    }
+
+    //  
+    //Gérer les blessures :
+    //
+    const blessurelegereBox = document.getElementById('blessurelegere');
+    var maxblessurelegere = data[0].maxblessurelegere;
+    for (let i = 1; i <= maxblessurelegere; i++) {
+      const blessure = document.createElement("img");
+      blessure.id="legerecircle"+i;
+      blessure.classList.add("circleblessure");
+      blessure.src="./img/circle.png";
+      blessurelegereBox.appendChild(blessure);
+    }
+
+    const blessuregraveBox = document.getElementById('blessuregrave');
+    var maxblessuregrave = data[0].maxblessuregrave;
+    for (let i = 1; i <= maxblessuregrave; i++) {
+      const blessure = document.createElement("img");
+      blessure.id="gravecircle"+i;
+      blessure.classList.add("circleblessure");
+      blessure.src="./img/circle.png";
+      blessuregraveBox.appendChild(blessure);
+    }
+
+    const blessuremortelleBox = document.getElementById('blessuremortelle');
+    var maxblessuremortelle = data[0].maxblessuremortelle;
+    for (let i = 1; i <= maxblessuremortelle; i++) {
+      const blessure = document.createElement("img");
+      blessure.id="mortellecircle"+i;
+      blessure.classList.add("circleblessure");
+      blessure.src="./img/circle.png";
+      blessuremortelleBox.appendChild(blessure);
+    }
+
+    const circlesblessure = document.querySelectorAll('.circleblessure');
+    circlesblessure.forEach(circle => {
+      circle.addEventListener('click', function() {
+        var id = this.id;
+        var blessure = id.substring(0, id.indexOf("circle"));
+        var note = parseInt(id.charAt(id.length - 1));
+        var thisImage = this.src;
+        thisImage = thisImage.split("/").pop().split("\\").pop();
+        if(blessure=="legere"){
+          var maxblessure = maxblessurelegere;
+        }
+        if(blessure=="grave"){
+          var maxblessure = maxblessuregrave;
+        }
+
+        if(blessure=="mortelle"){
+          var maxblessure = maxblessuremortelle;
+        }
+
+        if(thisImage == "circlered.png" && note =="1"){
+          this.src="./img/circle.png";
+          selectBlessure(blessure,0);
+          for (let i = note + 1; i <= maxblessure; i++) {
+            document.getElementById(this.id.slice(0, -1) + i).src = './img/circle.png';
+          }
+        }else if(thisImage == "circle.png" && note =="1"){
+          this.src="./img/circlered.png";
+          selectBlessure(blessure,note);
+          for (let i = note + 1; i <= maxblessure; i++) {
+            document.getElementById(this.id.slice(0, -1) + i).src = './img/circle.png';
+          }
+        }else{
+          // selectBlessure(blessure, note);
+          const currentNote = parseInt(this.id.slice(-1));
+          selectBlessure(blessure,note);
+          for (let i = 1; i <= currentNote; i++) {
+            document.getElementById(this.id.slice(0, -1) + i).src = './img/circlered.png';
+          }
+          for (let i = currentNote + 1; i <= maxblessure; i++) {
+            document.getElementById(this.id.slice(0, -1) + i).src = './img/circle.png';
+          }
+        }
+      });
+    });
+
+    if (data[0].blessurelegere !== 0) {
+      document.getElementById('legerecircle'+data[0].blessurelegere).click();
+    }
+
+    if (data[0].blessuregrave !== 0) {
+      document.getElementById('gravecircle'+data[0].blessuregrave).click();
+    }
+
+    if (data[0].blessuremortelle !== 0) {
+      document.getElementById('mortellecircle'+data[0].blessuremortelle).click();
+    }
+
   })
   .catch((error) => {
     console.error(error);
   });
 
   return Promise.resolve();
-}
-console.log(caracteristiqueValue);
+};
+
 export var caracteristique = caracteristiqueValue;
 export var competence = competenceValue;

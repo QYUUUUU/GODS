@@ -153,8 +153,6 @@
     margin-top: -7px;
   }
   .modal-content{
-    width: 983px;
-    height:501px;
     background-color: unset;
     background-image: url("../img/modale.png");
     background-repeat: no-repeat;
@@ -229,9 +227,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     max-height: 90vh;
-    overflow-y: auto;
-    background-color: white;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    overflow-y: none;
   }
 
   .ui-controls {
@@ -246,4 +242,88 @@
     position: relative;
     z-index: 0;
     /* other styles */
+  }
+
+  .button {
+    background-image: url("../img/modale.png");
+    background-size: cover;
+    color: #000000;
+    font-weight: bold;
+    font-size: 20px;
+    text-transform: uppercase;
+    border: none;
+    padding: 10px 20px;
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    vertical-align: middle;
+    cursor: pointer;
+    font-family: 'Marker Felt', cursive;
+  }
+  
+  .button:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+  }
+  
+  .button:hover:before {
+    opacity: 0.7;
+  }
+
+  #blessurelegere{
+    max-width: 143px;
+  }
+
+  #blessuregrave{
+    max-width: 143px;
+  }
+
+  #blessuremortelle{
+    max-width: 143px;
+  }
+
+  .circleblessure {
+    height: 20px;
+    width: 20px;
+    position: relative;
+    z-index: 99;
+  }
+
+  .circlereserve {
+    height: 20px;
+    width: 20px;
+    position: relative;
+    z-index: 99;
+  }
+
+
+  .dual-button {
+    display: inline-block;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    text-decoration: none;
+    margin: 0;
+    width: 10px;
+    height: 10px;
+    font-size: 10px;
+  }
+ 
+  
+  .left-button:hover {
+    background-color: #aaa;
+  }
+  
+  .right-button:hover {
+    background-color: #aaa;
+  }
+  
+  .blessurestype {
+    text-align: center;
   }
