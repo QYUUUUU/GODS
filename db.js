@@ -8,7 +8,7 @@ const pool = mysql.createPool({
   connectionLimit: 10,
   host: 'localhost',
   user: 'root',
-  password: '',
+  password: 'root',
   database: 'godzila'
 });
 
@@ -83,6 +83,20 @@ app.put('/personnage/:id/:field/:value', (req, res) => {
 
 // Serve static files from the /Rolls directory
 app.use(express.static(path.join(__dirname, 'Rolls')));
+
+app.set('view engine', 'ejs');
+
+app.set('views', path.join(__dirname, '/Rolls/views'));
+
+app.get('/charactersheet', (req, res) => {
+  res.render('personnage');
+});
+
+app.get('/connexion', (req, res) => {
+  res.render('connexion');
+});
+
+
 
 // Start the server
 const PORT = process.env.PORT || 3000;

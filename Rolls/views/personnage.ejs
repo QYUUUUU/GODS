@@ -1,22 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="css/accueil.css" />
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 
-    <script src="../node_modules/three/build/three.js"></script>
-    <script src="../node_modules/cannon/build/cannon.js"></script>
-    <script src="../node_modules/three/examples/js/controls/OrbitControls.js"></script>
-    <script src="../node_modules/three/examples/js/libs/stats.min.js"></script>
-    <script type="module" src="../node_modules/threejs-dice/lib/dice.js"></script>
+  
+  <%- include('header', { title: 'Character Sheet' }) %>
+  
+  <script src="../node_modules/three/build/three.js"></script>
+  <script src="../node_modules/cannon/build/cannon.js"></script>
+  <script src="../node_modules/three/examples/js/controls/OrbitControls.js"></script>
+  <script src="../node_modules/three/examples/js/libs/stats.min.js"></script>
+  <script type="module" src="../node_modules/threejs-dice/lib/dice.js"></script>
 
-    <title>Bootstrap Page</title>
-  </head>
+  <title>Bootstrap Page</title>
+</head>
 <div id="original-content">
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
