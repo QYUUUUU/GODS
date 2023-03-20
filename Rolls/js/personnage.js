@@ -565,9 +565,11 @@ getPersonnage(id)
     //  
     //Gérer les réserves :
     //
-    const effortBox = document.getElementById('effort');
+
     var maxeffort = data[0].maxeffort;
-    console.log(maxeffort);
+    var maxsangfroid = data[0].maxsangfroid;
+    function reservesDisplay(maxeffort, maxsangfroid){
+    const effortBox = document.getElementById('effort');
     for (let i = 1; i <= maxeffort; i++) {
       const effort = document.createElement("img");
       effort.id="effortcircle"+i;
@@ -577,7 +579,6 @@ getPersonnage(id)
     }
 
     const sangfroidBox = document.getElementById('sangfroid');
-    var maxsangfroid = data[0].maxsangfroid;
     for (let i = 1; i <= maxsangfroid; i++) {
       const sangfroid = document.createElement("img");
       sangfroid.id="sangfroidcircle"+i;
@@ -639,97 +640,170 @@ getPersonnage(id)
     if (data[0].sangfroid !== 0) {
       document.getElementById('sangfroidcircle'+data[0].sangfroid).click();
     }
+  }
 
+  reservesDisplay(maxeffort, maxsangfroid);
     //  
     //Gérer les blessures :
     //
-    const blessurelegereBox = document.getElementById('blessurelegere');
     var maxblessurelegere = data[0].maxblessurelegere;
-    for (let i = 1; i <= maxblessurelegere; i++) {
-      const blessure = document.createElement("img");
-      blessure.id="legerecircle"+i;
-      blessure.classList.add("circleblessure");
-      blessure.src="./img/circle.png";
-      blessurelegereBox.appendChild(blessure);
-    }
-
-    const blessuregraveBox = document.getElementById('blessuregrave');
     var maxblessuregrave = data[0].maxblessuregrave;
-    for (let i = 1; i <= maxblessuregrave; i++) {
-      const blessure = document.createElement("img");
-      blessure.id="gravecircle"+i;
-      blessure.classList.add("circleblessure");
-      blessure.src="./img/circle.png";
-      blessuregraveBox.appendChild(blessure);
-    }
-
-    const blessuremortelleBox = document.getElementById('blessuremortelle');
     var maxblessuremortelle = data[0].maxblessuremortelle;
-    for (let i = 1; i <= maxblessuremortelle; i++) {
-      const blessure = document.createElement("img");
-      blessure.id="mortellecircle"+i;
-      blessure.classList.add("circleblessure");
-      blessure.src="./img/circle.png";
-      blessuremortelleBox.appendChild(blessure);
+    function blessureDisplay(maxblessurelegere, maxblessuregrave, maxblessuremortelle){
+      const blessurelegereBox = document.getElementById('blessurelegere');
+      for (let i = 1; i <= maxblessurelegere; i++) {
+        const blessure = document.createElement("img");
+        blessure.id="legerecircle"+i;
+        blessure.classList.add("circleblessure");
+        blessure.src="./img/circle.png";
+        blessurelegereBox.appendChild(blessure);
+      }
+  
+      const blessuregraveBox = document.getElementById('blessuregrave');
+      for (let i = 1; i <= maxblessuregrave; i++) {
+        const blessure = document.createElement("img");
+        blessure.id="gravecircle"+i;
+        blessure.classList.add("circleblessure");
+        blessure.src="./img/circle.png";
+        blessuregraveBox.appendChild(blessure);
+      }
+  
+      const blessuremortelleBox = document.getElementById('blessuremortelle');
+      for (let i = 1; i <= maxblessuremortelle; i++) {
+        const blessure = document.createElement("img");
+        blessure.id="mortellecircle"+i;
+        blessure.classList.add("circleblessure");
+        blessure.src="./img/circle.png";
+        blessuremortelleBox.appendChild(blessure);
+      }
+  
+      const circlesblessure = document.querySelectorAll('.circleblessure');
+      circlesblessure.forEach(circle => {
+        circle.addEventListener('click', function() {
+          var id = this.id;
+          var blessure = id.substring(0, id.indexOf("circle"));
+          var note = parseInt(id.charAt(id.length - 1));
+          var thisImage = this.src;
+          thisImage = thisImage.split("/").pop().split("\\").pop();
+          if(blessure=="legere"){
+            var maxblessure = maxblessurelegere;
+          }
+          if(blessure=="grave"){
+            var maxblessure = maxblessuregrave;
+          }
+  
+          if(blessure=="mortelle"){
+            var maxblessure = maxblessuremortelle;
+          }
+  
+          if(thisImage == "circlered.png" && note =="1"){
+            this.src="./img/circle.png";
+            selectBlessure(blessure,0);
+            for (let i = note + 1; i <= maxblessure; i++) {
+              document.getElementById(this.id.slice(0, -1) + i).src = './img/circle.png';
+            }
+          }else if(thisImage == "circle.png" && note =="1"){
+            this.src="./img/circlered.png";
+            selectBlessure(blessure,note);
+            for (let i = note + 1; i <= maxblessure; i++) {
+              document.getElementById(this.id.slice(0, -1) + i).src = './img/circle.png';
+            }
+          }else{
+            // selectBlessure(blessure, note);
+            const currentNote = parseInt(this.id.slice(-1));
+            selectBlessure(blessure,note);
+            for (let i = 1; i <= currentNote; i++) {
+              document.getElementById(this.id.slice(0, -1) + i).src = './img/circlered.png';
+            }
+            for (let i = currentNote + 1; i <= maxblessure; i++) {
+              document.getElementById(this.id.slice(0, -1) + i).src = './img/circle.png';
+            }
+          }
+        });
+      });
+  
+      if (data[0].blessurelegere !== 0) {
+        document.getElementById('legerecircle'+data[0].blessurelegere).click();
+      }
+  
+      if (data[0].blessuregrave !== 0) {
+        document.getElementById('gravecircle'+data[0].blessuregrave).click();
+      }
+  
+      if (data[0].blessuremortelle !== 0) {
+        document.getElementById('mortellecircle'+data[0].blessuremortelle).click();
+      }
+  
+    }
+    blessureDisplay(maxblessurelegere, maxblessuregrave, maxblessuremortelle);
+
+   
+
+    function reserveClear(){
+      const circleReserves= document.getElementsByClassName('circlereserve');
+      while (circleReserves.length > 0) {
+        circleReserves[0].parentNode.removeChild(circleReserves[0]);
+      }
+    }
+    function blessureClear(){
+      const circleBlessures= document.getElementsByClassName('circleblessure');
+      while (circleBlessures.length > 0) {
+        circleBlessures[0].parentNode.removeChild(circleBlessures[0]);
+      }
     }
 
-    const circlesblessure = document.querySelectorAll('.circleblessure');
-    circlesblessure.forEach(circle => {
-      circle.addEventListener('click', function() {
-        var id = this.id;
-        var blessure = id.substring(0, id.indexOf("circle"));
-        var note = parseInt(id.charAt(id.length - 1));
-        var thisImage = this.src;
-        thisImage = thisImage.split("/").pop().split("\\").pop();
-        if(blessure=="legere"){
-          var maxblessure = maxblessurelegere;
-        }
-        if(blessure=="grave"){
-          var maxblessure = maxblessuregrave;
-        }
+    const increments = document.querySelectorAll(".increments");
+    increments.forEach(increment => {
+      increment.addEventListener('click', function() {
+        var id = increment.id;
 
-        if(blessure=="mortelle"){
-          var maxblessure = maxblessuremortelle;
+        if (id === 'pluslegere') {
+          maxblessurelegere = maxblessurelegere+1;
+          updatePersonnageField(1, "maxblessurelegere", maxblessurelegere);
+        } else if (id === 'moinslegere') {
+          maxblessurelegere = maxblessurelegere-1;
+          updatePersonnageField(1, "maxblessurelegere", maxblessurelegere);
+        } else if (id === 'plusgrave') {
+          maxblessuregrave = maxblessuregrave+1;
+          updatePersonnageField(1, "maxblessuregrave", maxblessuregrave);
+        } else if (id === 'moinsgrave') {
+          maxblessuregrave = maxblessuregrave-1;
+          updatePersonnageField(1, "maxblessuregrave", maxblessuregrave);
+        } else if (id === 'plusmortelle') {
+          maxblessuremortelle = maxblessuremortelle+1;
+          updatePersonnageField(1, "maxblessuremortelle", maxblessuremortelle);
+        } else if (id === 'moinsmortelle') {
+          maxblessuremortelle = maxblessuremortelle-1;
+          updatePersonnageField(1, "maxblessuremortelle", maxblessuremortelle);
         }
-
-        if(thisImage == "circlered.png" && note =="1"){
-          this.src="./img/circle.png";
-          selectBlessure(blessure,0);
-          for (let i = note + 1; i <= maxblessure; i++) {
-            document.getElementById(this.id.slice(0, -1) + i).src = './img/circle.png';
-          }
-        }else if(thisImage == "circle.png" && note =="1"){
-          this.src="./img/circlered.png";
-          selectBlessure(blessure,note);
-          for (let i = note + 1; i <= maxblessure; i++) {
-            document.getElementById(this.id.slice(0, -1) + i).src = './img/circle.png';
-          }
-        }else{
-          // selectBlessure(blessure, note);
-          const currentNote = parseInt(this.id.slice(-1));
-          selectBlessure(blessure,note);
-          for (let i = 1; i <= currentNote; i++) {
-            document.getElementById(this.id.slice(0, -1) + i).src = './img/circlered.png';
-          }
-          for (let i = currentNote + 1; i <= maxblessure; i++) {
-            document.getElementById(this.id.slice(0, -1) + i).src = './img/circle.png';
-          }
-        }
+        blessureClear();
+        blessureDisplay(maxblessurelegere, maxblessuregrave, maxblessuremortelle);
       });
     });
 
-    if (data[0].blessurelegere !== 0) {
-      document.getElementById('legerecircle'+data[0].blessurelegere).click();
-    }
+    const incrementsreserve = document.querySelectorAll(".incrementsreserve");
+    incrementsreserve.forEach(increment => {
+      increment.addEventListener('click', function() {
+        var id = increment.id;
 
-    if (data[0].blessuregrave !== 0) {
-      document.getElementById('gravecircle'+data[0].blessuregrave).click();
-    }
-
-    if (data[0].blessuremortelle !== 0) {
-      document.getElementById('mortellecircle'+data[0].blessuremortelle).click();
-    }
-
+        if (id === 'pluseffort') {
+          maxeffort = maxeffort+1;
+          updatePersonnageField(1, "maxeffort", maxeffort);
+        } else if (id === 'moinseffort') {
+          maxeffort = maxeffort-1;
+          updatePersonnageField(1, "maxeffort", maxeffort);
+        } else if (id === 'plussangfroid') {
+          maxsangfroid = maxsangfroid+1;
+          updatePersonnageField(1, "maxsangfroid", maxsangfroid);
+        } else if (id === 'moinssangfroid') {
+          maxsangfroid = maxsangfroid-1;
+          updatePersonnageField(1, "maxsangfroid", maxsangfroid);
+        }
+        reserveClear();
+        reservesDisplay(maxeffort, maxsangfroid);
+      });
+    });
+   
   })
   .catch((error) => {
     console.error(error);

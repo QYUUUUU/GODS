@@ -186,7 +186,11 @@
   }
 
  .blessurestype{
-  margin-right: -150px;
+  margin-right: -200px;
+ }
+
+ .blessurestypebless{
+  margin-right: -170px;
  }
 
  .totheright{
@@ -327,3 +331,30 @@
   .blessurestype {
     text-align: center;
   }
+
+  .increments{
+    width: 10px;
+    height: 10px;
+    font-size: 10px;
+    padding: none;
+    position: relative;
+    z-index: 99;
+  }
+
+  .incrementsreserve{
+    width: 10px;
+    height: 10px;
+    font-size: 10px;
+    padding: none;
+    position: relative;
+    z-index: 99;
+  }
+
+  .alilhigher{
+    margin-top: -10px;
+  }
+
+  #original-content > div.container-fluid > div > div > div.card > div > div:nth-child(36) > div.col-6.blessurestype.row.justify-content-center > div:nth-child(3){
+    min-width: 170px;
+  }
+
