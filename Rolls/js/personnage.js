@@ -37,7 +37,7 @@ function selectBlessure(blessure, note) {
       mortelle = note;
       break;
   }
-  updatePersonnageField(1, "blessure"+blessure, note);
+  updatePersonnageField(Id_Personnage, "blessure"+blessure, note);
 }
 
 
@@ -53,7 +53,7 @@ function selectReserve(reserve, note) {
       sangfroid = note;
       break;
   }
-  updatePersonnageField(1, reserve, note);
+  updatePersonnageField(Id_Personnage, reserve, note);
 }
 
 // Variables globales pour stocker les notes sélectionnées
@@ -94,7 +94,7 @@ function selectNote(caracteristique, note) {
       empathie = note;
       break;
   }
-  updatePersonnageField(1, caracteristique, note);
+  updatePersonnageField(Id_Personnage, caracteristique, note);
 }
 
 const losangescomp = document.querySelectorAll('.losangecarac');
@@ -269,7 +269,7 @@ function selectNoteCompetence(competence, note) {
       rituels = note;
       break;
   }
-  updatePersonnageField(1, competence, note)
+  updatePersonnageField(Id_Personnage, competence, note)
 }
 
 const caracSelector = document.getElementById("caracteristique");
@@ -342,14 +342,14 @@ setInterval(updateCaracteristique, 3000);
     // Add change event listener to each input field
     inputField.addEventListener("change", function() {
       // Call the relevant function based on the input field's ID
-       updatePersonnageField(1, inputField.id, inputField.value)
+       updatePersonnageField(Id_Personnage, inputField.id, inputField.value)
     });
   });
 
 
 
 function updatePersonnageField(id, field, value) {
-  const url = `http://localhost:3000/personnage/${id}/${field}/${value}`;
+  const url = `/personnage/${id}/${field}/${value}`;
 
   fetch(url, {
     method: 'PUT'
@@ -371,10 +371,10 @@ function updatePersonnageField(id, field, value) {
 
 
 
-const id = "1"; // Replace with the actual ID you want to fetch
-async function getPersonnage(id) {
+// Replace with the actual ID you want to fetch
+async function getPersonnage(Id_Personnage) {
   try {
-    const response = await fetch(`http://localhost:3000/personnage/${id}`);
+    const response = await fetch(`/personnage/${Id_Personnage}`);
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
@@ -387,9 +387,10 @@ async function getPersonnage(id) {
 
 
 
-
-getPersonnage(id)
+console.log(Id_Personnage);
+getPersonnage(Id_Personnage)
   .then((data) => {
+    console.log(data);
     document.getElementById('nom').value = data[0].nom;
     document.getElementById('age').value = data[0].age;
     document.getElementById('genre').value = data[0].genre;
@@ -409,155 +410,154 @@ getPersonnage(id)
     document.getElementById('malusinconnu').value = data[0].malusinconnu;
     document.getElementById('malusmental').value = data[0].malusmental;
 
-
-    if (data[0].connaissance !== 0) {
+    if (data[0].connaissance !== 0 && data[0].connaissance !== null) {
       document.getElementById('connaissancelosange'+data[0].connaissance).click();
     }
 
-    if (data[0].volonte !== 0) {
+    if (data[0].volonte !== 0 && data[0].volonte !== null) {
       document.getElementById('volontelosange'+data[0].volonte).click();
     }
 
-    if (data[0].puissance !== 0) {
+    if (data[0].puissance !== 0 && data[0].puissance !== null) {
       document.getElementById('puissancelosange'+data[0].puissance).click();
     }
 
-    if (data[0].resistance !== 0) {
+    if (data[0].resistance !== 0 && data[0].resistance !== null) {
       document.getElementById('resistancelosange'+data[0].resistance).click();
     }
 
-    if (data[0].reflexes !== 0) {
+    if (data[0].reflexes !== 0 && data[0].reflexes !== null) {
       document.getElementById('reflexeslosange'+data[0].reflexes).click();
     }
 
-    if (data[0].perception !== 0) {
+    if (data[0].perception !== 0 && data[0].perception !== null) {
       document.getElementById('perceptionlosange'+data[0].perception).click();
     }
 
-    if (data[0].empathie !== 0) {
+    if (data[0].empathie !== 0 && data[0].empathie !== null) {
       document.getElementById('empathielosange'+data[0].empathie).click();
     }
 
-    if (data[0].precicion !== 0) {
+    if (data[0].precicion !== 0 && data[0].precicion !== null) {
       document.getElementById('precicionlosange'+data[0].precicion).click();
     }
 
-    if (data[0].arts !== 0) {
+    if (data[0].arts !== 0 && data[0].arts !== null) {
       document.getElementById('artslosange'+data[0].arts).click();
     }
 
-    if (data[0].animalisme !== 0) {
+    if (data[0].animalisme !== 0 && data[0].animalisme !== null) {
       document.getElementById('animalismelosange'+data[0].animalisme).click();
     }
 
-    if (data[0].cite !== 0) {
+    if (data[0].cite !== 0 && data[0].cite !== null) {
       document.getElementById('citelosange'+data[0].cite).click();
     }
 
-    if (data[0].faune !== 0) {
+    if (data[0].faune !== 0 && data[0].faune !== null) {
       document.getElementById('faunelosange'+data[0].faune).click();
     }
 
-    if (data[0].civilisations !== 0) {
+    if (data[0].civilisations !== 0 && data[0].civilisations !== null) {
       document.getElementById('civilisationslosange'+data[0].civilisations).click();
     }
 
-    if (data[0].relationnel !== 0) {
+    if (data[0].relationnel !== 0 && data[0].relationnel !== null) {
       document.getElementById('relationnellosange'+data[0].relationnel).click();
     }
 
-    if (data[0].pistage !== 0) {
+    if (data[0].pistage !== 0 && data[0].pistage !== null) {
       document.getElementById('pistagelosange'+data[0].pistage).click();
     }
 
-    if (data[0].soins !== 0) {
+    if (data[0].soins !== 0 && data[0].soins !== null) {
       document.getElementById('soinslosange'+data[0].soins).click();
     }
 
-    if (data[0].territoire !== 0) {
+    if (data[0].territoire !== 0 && data[0].territoire !== null) {
       document.getElementById('territoirelosange'+data[0].territoire).click();
     }
 
-    if (data[0].adresse !== 0) {
+    if (data[0].adresse !== 0 && data[0].adresse !== null) {
       document.getElementById('adresselosange'+data[0].adresse).click();
     }
 
-    if (data[0].athletisme !== 0) {
+    if (data[0].athletisme !== 0 && data[0].athletisme !== null) {
       document.getElementById('athletismelosange'+data[0].athletisme).click();
     }
 
-    if (data[0].armurerie !== 0) {
+    if (data[0].armurerie !== 0 && data[0].armurerie !== null) {
       document.getElementById('armurerielosange'+data[0].armurerie).click();
     }
 
-    if (data[0].discretion !== 0) {
+    if (data[0].discretion !== 0 && data[0].discretion !== null) {
       document.getElementById('discretionlosange'+data[0].discretion).click();
     }
 
-    if (data[0].artisanat !== 0) {
+    if (data[0].artisanat !== 0 && data[0].artisanat !== null) {
       document.getElementById('artisanatlosange'+data[0].artisanat).click();
     }
-        if (data[0].flore !== 0) {
+        if (data[0].flore !== 0 && data[0].flore !== null) {
       document.getElementById('florelosange'+data[0].flore).click();
     }
 
-    if (data[0].mecanisme !== 0) {
+    if (data[0].mecanisme !== 0 && data[0].mecanisme !== null) {
       document.getElementById('mecanismelosange'+data[0].mecanisme).click();
     }
 
-    if (data[0].vigilance !== 0) {
+    if (data[0].vigilance !== 0 && data[0].vigilance !== null) {
       document.getElementById('vigilancelosange'+data[0].vigilance).click();
     }
 
-    if (data[0].runes !== 0) {
+    if (data[0].runes !== 0 && data[0].runes !== null) {
       document.getElementById('runeslosange'+data[0].runes).click();
     }
 
-    if (data[0].voyage !== 0) {
+    if (data[0].voyage !== 0 && data[0].voyage !== null) {
       document.getElementById('voyagelosange'+data[0].voyage).click();
     }
 
-    if (data[0].bouclier !== 0) {
+    if (data[0].bouclier !== 0 && data[0].bouclier !== null) {
       document.getElementById('bouclierlosange'+data[0].bouclier).click();
     }
 
-    if (data[0].eclats !== 0) {
+    if (data[0].eclats !== 0 && data[0].eclats !== null) {
       document.getElementById('eclatslosange'+data[0].eclats).click();
     }
 
-    if (data[0].cac !== 0) {
+    if (data[0].cac !== 0 && data[0].cac !== null) {
       document.getElementById('caclosange'+data[0].cac).click();
     }
 
-    if (data[0].lunes !== 0) {
+    if (data[0].lunes !== 0 && data[0].lunes !== null) {
       document.getElementById('luneslosange'+data[0].lunes).click();
     }
 
-    if (data[0].lancer !== 0) {
+    if (data[0].lancer !== 0 && data[0].lancer !== null) {
       document.getElementById('lancerlosange'+data[0].lancer).click();
     }
 
-    if (data[0].mythes !== 0) {
+    if (data[0].mythes !== 0 && data[0].mythes !== null) {
       document.getElementById('mytheslosange'+data[0].mythes).click();
     }
 
-    if (data[0].melee !== 0) {
+    if (data[0].melee !== 0 && data[0].melee !== null) {
       document.getElementById('meleelosange'+data[0].melee).click();
     }
 
-    if (data[0].pantheons !== 0) {
+    if (data[0].pantheons !== 0 && data[0].pantheons !== null) {
       document.getElementById('pantheonslosange'+data[0].pantheons).click();
     }
 
-    if (data[0].tir !== 0) {
+    if (data[0].tir !== 0 && data[0].tir !== null) {
       document.getElementById('tirlosange'+data[0].tir).click();
     }
 
-    if (data[0].rituels !== 0) {
+    if (data[0].rituels !== 0 && data[0].rituels !== null) {
       document.getElementById('rituelslosange'+data[0].rituels).click();
     }
 
-    if (data[0].montures !== 0) {
+    if (data[0].montures !== 0 && data[0].montures !== null) {
       document.getElementById('montureslosange'+data[0].montures).click();
     }
 
@@ -633,11 +633,11 @@ getPersonnage(id)
       });
     });
 
-    if (data[0].effort !== 0) {
+    if (data[0].effort !== 0 && data[0].effort !== null) {
       document.getElementById('effortcircle'+data[0].effort).click();
     }
 
-    if (data[0].sangfroid !== 0) {
+    if (data[0].sangfroid !== 0 && data[0].sangfroid !== null) {
       document.getElementById('sangfroidcircle'+data[0].sangfroid).click();
     }
   }
@@ -722,15 +722,15 @@ getPersonnage(id)
         });
       });
   
-      if (data[0].blessurelegere !== 0) {
+      if (data[0].blessurelegere !== 0 && data[0].blessurelegere !== null) {
         document.getElementById('legerecircle'+data[0].blessurelegere).click();
       }
   
-      if (data[0].blessuregrave !== 0) {
+      if (data[0].blessuregrave !== 0 && data[0].blessuregrave !== null) {
         document.getElementById('gravecircle'+data[0].blessuregrave).click();
       }
   
-      if (data[0].blessuremortelle !== 0) {
+      if (data[0].blessuremortelle !== 0 && data[0].blessuremortelle !== null) {
         document.getElementById('mortellecircle'+data[0].blessuremortelle).click();
       }
   
@@ -759,22 +759,22 @@ getPersonnage(id)
 
         if (id === 'pluslegere') {
           maxblessurelegere = maxblessurelegere+1;
-          updatePersonnageField(1, "maxblessurelegere", maxblessurelegere);
+          updatePersonnageField(Id_Personnage, "maxblessurelegere", maxblessurelegere);
         } else if (id === 'moinslegere') {
           maxblessurelegere = maxblessurelegere-1;
-          updatePersonnageField(1, "maxblessurelegere", maxblessurelegere);
+          updatePersonnageField(Id_Personnage, "maxblessurelegere", maxblessurelegere);
         } else if (id === 'plusgrave') {
           maxblessuregrave = maxblessuregrave+1;
-          updatePersonnageField(1, "maxblessuregrave", maxblessuregrave);
+          updatePersonnageField(Id_Personnage, "maxblessuregrave", maxblessuregrave);
         } else if (id === 'moinsgrave') {
           maxblessuregrave = maxblessuregrave-1;
-          updatePersonnageField(1, "maxblessuregrave", maxblessuregrave);
+          updatePersonnageField(Id_Personnage, "maxblessuregrave", maxblessuregrave);
         } else if (id === 'plusmortelle') {
           maxblessuremortelle = maxblessuremortelle+1;
-          updatePersonnageField(1, "maxblessuremortelle", maxblessuremortelle);
+          updatePersonnageField(Id_Personnage, "maxblessuremortelle", maxblessuremortelle);
         } else if (id === 'moinsmortelle') {
           maxblessuremortelle = maxblessuremortelle-1;
-          updatePersonnageField(1, "maxblessuremortelle", maxblessuremortelle);
+          updatePersonnageField(Id_Personnage, "maxblessuremortelle", maxblessuremortelle);
         }
         blessureClear();
         blessureDisplay(maxblessurelegere, maxblessuregrave, maxblessuremortelle);
@@ -788,16 +788,16 @@ getPersonnage(id)
 
         if (id === 'pluseffort') {
           maxeffort = maxeffort+1;
-          updatePersonnageField(1, "maxeffort", maxeffort);
+          updatePersonnageField(Id_Personnage, "maxeffort", maxeffort);
         } else if (id === 'moinseffort') {
           maxeffort = maxeffort-1;
-          updatePersonnageField(1, "maxeffort", maxeffort);
+          updatePersonnageField(Id_Personnage, "maxeffort", maxeffort);
         } else if (id === 'plussangfroid') {
           maxsangfroid = maxsangfroid+1;
-          updatePersonnageField(1, "maxsangfroid", maxsangfroid);
+          updatePersonnageField(Id_Personnage, "maxsangfroid", maxsangfroid);
         } else if (id === 'moinssangfroid') {
           maxsangfroid = maxsangfroid-1;
-          updatePersonnageField(1, "maxsangfroid", maxsangfroid);
+          updatePersonnageField(Id_Personnage, "maxsangfroid", maxsangfroid);
         }
         reserveClear();
         reservesDisplay(maxeffort, maxsangfroid);

@@ -1,10 +1,20 @@
   <%- include('header', { title: 'Character Sheet' }) %>
 
-  <title>Bootstrap Page</title>
+  <title>GODS</title>
 </head>
 <% if (message) { %>
     <div class="alert alert-success">
         <%= message %>
     </div>
 <% } %>
-characterslist ! <%= data %>
+
+</br>
+<button id="newCharacter" class="newCharacterbutton">New Character</button>
+
+<div id="charabox" class="row justify-content-around"></div>
+
+<script>
+    // Access the userId variable in your script
+    var userId = <%= userId %>;
+</script>
+<script src="./js/characterslist.js"></script>
