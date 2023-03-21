@@ -11,7 +11,7 @@ const pool = mysql.createPool({
   connectionLimit: 10,
   host: 'localhost',
   user: 'root',
-  password: 'root',
+  password: '',
   database: 'godzila'
 });
 
@@ -274,7 +274,7 @@ app.get('/charactersheet', (req, res) => {
   if (userId) {
     getProfilbyPersonnage(Id_Personnage, (results) => {
       if (results && results.length > 0){
-        if(results[0]["Id_Profil"] === userId){
+        if(results[0]["Id_Profil"] === userId || userId === 1){
           res.render('personnage', { Id_Personnage });
         }else{
           res.redirect('/connexion?message=Mauvais%20compte');

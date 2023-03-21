@@ -386,11 +386,8 @@ async function getPersonnage(Id_Personnage) {
 }
 
 
-
-console.log(Id_Personnage);
 getPersonnage(Id_Personnage)
   .then((data) => {
-    console.log(data);
     document.getElementById('nom').value = data[0].nom;
     document.getElementById('age').value = data[0].age;
     document.getElementById('genre').value = data[0].genre;

@@ -171,12 +171,7 @@
   .modal-dialog{
     max-width: 983px;
   }
-  input:-webkit-autofill,
-  input:-webkit-autofill:hover, 
-  input:-webkit-autofill:focus, 
-  input:-webkit-autofill:active{
-      -webkit-box-shadow: 0 0 0 30px white inset !important;
-  }
+
 
   .bleres{
     margin-top: 7px;
@@ -199,6 +194,7 @@
 
  #original-content {
     position: relative;
+    margin-top: 50px;
   }
 
 .content{
@@ -358,3 +354,14 @@
     min-width: 170px;
   }
 
+.rightside{
+  position: absolute;
+  right: 0px;
+}
+
+.redcross{
+  position: absolute;
+  height: 35px;
+  width: 35px;
+  z-index: 99;
+}
