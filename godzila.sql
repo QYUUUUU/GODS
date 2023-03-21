@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : sam. 11 mars 2023 à 17:35
--- Version du serveur : 5.7.33
--- Version de PHP : 7.4.19
+-- Généré le : mar. 21 mars 2023 à 10:45
+-- Version du serveur : 10.9.3-MariaDB
+-- Version de PHP : 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,17 @@ SET time_zone = "+00:00";
 --
 -- Base de données : `godzila`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `control`
+--
+
+CREATE TABLE `control` (
+  `Id_Personnage` int(11) NOT NULL,
+  `Id_Profil` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -85,26 +96,67 @@ CREATE TABLE `personnage` (
   `malusarme` int(11) DEFAULT NULL,
   `malusinconnu` int(11) DEFAULT NULL,
   `malusmental` int(11) DEFAULT NULL,
-  `Id_Profil` int(11) DEFAULT NULL,
-  `empathie` int(11) DEFAULT NULL
+  `empathie` int(11) DEFAULT NULL,
+  `maxblessurelegere` int(11) NOT NULL,
+  `blessurelegere` int(11) NOT NULL,
+  `maxblessuregrave` int(11) NOT NULL,
+  `blessuregrave` int(11) NOT NULL,
+  `maxblessuremortelle` int(11) NOT NULL,
+  `blessuremortelle` int(11) NOT NULL,
+  `maxeffort` int(11) NOT NULL,
+  `effort` int(11) NOT NULL,
+  `maxsangfroid` int(11) NOT NULL,
+  `sangfroid` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `personnage`
 --
 
-INSERT INTO `personnage` (`Id_Personnage`, `nom`, `age`, `genre`, `instinct`, `signeastro`, `origine`, `reputation`, `depensee`, `totale`, `puissance`, `resistance`, `precicion`, `reflexes`, `connaissance`, `perception`, `volonte`, `arts`, `cite`, `civilisations`, `relationnel`, `soins`, `animalisme`, `faune`, `montures`, `pistage`, `territoire`, `adresse`, `armurerie`, `artisanat`, `mecanisme`, `runes`, `athletisme`, `discretion`, `flore`, `vigilance`, `voyage`, `bouclier`, `cac`, `lancer`, `melee`, `tir`, `eclats`, `lunes`, `mythes`, `pantheons`, `rituels`, `malusphysique`, `malusmanuel`, `malussocial`, `malushumain`, `malusanimal`, `malusoutils`, `malusterres`, `malusarme`, `malusinconnu`, `malusmental`, `Id_Profil`, `empathie`) VALUES
-(1, 'Jo', '12', 'Male', 'Gardien', 'dfh', 'dfh', NULL, 0, 12, 1, 1, 1, 3, 4, 3, 3, 3, 1, 1, 0, 3, 0, 1, 2, 4, 0, 0, 3, 6, 2, 3, 1, 0, 0, 6, 1, 3, 4, 2, 5, 1, 1, 4, 2, 5, 1, 12, 12, 12, -12, 21, 21, 2, 21, 12, 4, NULL, 2);
+INSERT INTO `personnage` (`Id_Personnage`, `nom`, `age`, `genre`, `instinct`, `signeastro`, `origine`, `reputation`, `depensee`, `totale`, `puissance`, `resistance`, `precicion`, `reflexes`, `connaissance`, `perception`, `volonte`, `arts`, `cite`, `civilisations`, `relationnel`, `soins`, `animalisme`, `faune`, `montures`, `pistage`, `territoire`, `adresse`, `armurerie`, `artisanat`, `mecanisme`, `runes`, `athletisme`, `discretion`, `flore`, `vigilance`, `voyage`, `bouclier`, `cac`, `lancer`, `melee`, `tir`, `eclats`, `lunes`, `mythes`, `pantheons`, `rituels`, `malusphysique`, `malusmanuel`, `malussocial`, `malushumain`, `malusanimal`, `malusoutils`, `malusterres`, `malusarme`, `malusinconnu`, `malusmental`, `empathie`, `maxblessurelegere`, `blessurelegere`, `maxblessuregrave`, `blessuregrave`, `maxblessuremortelle`, `blessuremortelle`, `maxeffort`, `effort`, `maxsangfroid`, `sangfroid`) VALUES
+(1, 'Jo', '12', 'L', 'Gardien', 'dfh', 'dfh', NULL, 0, 12, 3, 1, 1, 3, 3, 3, 3, 6, 1, 1, 4, 3, 0, 1, 2, 4, 0, 0, 1, 4, 2, 3, 1, 0, 2, 6, 2, 3, 6, 2, 5, 1, 2, 4, 2, 5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 7, 4, 5, 4, 4, 3, 14, 13, 11, 10);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `profil`
+--
+
+CREATE TABLE `profil` (
+  `Id_Profil` int(11) NOT NULL,
+  `pseudo` varchar(20) NOT NULL,
+  `passw` varchar(300) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `profil`
+--
+
+INSERT INTO `profil` (`Id_Profil`, `pseudo`, `passw`) VALUES
+(1, 'mesmerde', '4c28ac101d0679d0485e61f6e723524798fb0163b907d4c78a4bbbfdfa3ec10e');
 
 --
 -- Index pour les tables déchargées
 --
 
 --
+-- Index pour la table `control`
+--
+ALTER TABLE `control`
+  ADD PRIMARY KEY (`Id_Personnage`,`Id_Profil`),
+  ADD KEY `Id_Profil` (`Id_Profil`);
+
+--
 -- Index pour la table `personnage`
 --
 ALTER TABLE `personnage`
   ADD PRIMARY KEY (`Id_Personnage`);
+
+--
+-- Index pour la table `profil`
+--
+ALTER TABLE `profil`
+  ADD PRIMARY KEY (`Id_Profil`);
 
 --
 -- AUTO_INCREMENT pour les tables déchargées
@@ -115,6 +167,23 @@ ALTER TABLE `personnage`
 --
 ALTER TABLE `personnage`
   MODIFY `Id_Personnage` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT pour la table `profil`
+--
+ALTER TABLE `profil`
+  MODIFY `Id_Profil` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- Contraintes pour les tables déchargées
+--
+
+--
+-- Contraintes pour la table `control`
+--
+ALTER TABLE `control`
+  ADD CONSTRAINT `control_ibfk_1` FOREIGN KEY (`Id_Personnage`) REFERENCES `personnage` (`Id_Personnage`),
+  ADD CONSTRAINT `control_ibfk_2` FOREIGN KEY (`Id_Profil`) REFERENCES `profil` (`Id_Profil`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
