@@ -1,5 +1,8 @@
 var caracteristiqueValue;
 var competenceValue;
+var caracteristiqueMalusValue;
+var competenceMalusValue;
+var modifierValue;
 
 export function buildPage() {
 const losanges = document.querySelectorAll('.losange');
@@ -272,71 +275,6 @@ function selectNoteCompetence(competence, note) {
   updatePersonnageField(Id_Personnage, competence, note)
 }
 
-const caracSelector = document.getElementById("caracteristique");
-caracSelector.addEventListener("change", function(event) {
-  updateCaracteristique();
-});
-function updateCaracteristique(){
-  const variablesMap = {
-    puissance: puissance,
-    precicion: precicion,
-    connaissance: connaissance,
-    volonte: volonte,
-    resistance: resistance,
-    reflexes: reflexes,
-    perception: perception,
-    empathie: empathie
-  };
-  caracteristiqueValue = variablesMap[caracSelector.value];
-  caracteristique = caracteristiqueValue;
-}
-
-
-const compSelector = document.getElementById("competence");
-compSelector.addEventListener("change", function(event) {
-  updateCompetence();
-});
-
-function updateCompetence(){
-  const variables2Map = {
-    arts: arts,
-    animalisme: animalisme,
-    cite: cite,
-    faune: faune,
-    civilisations: civilisations,
-    montures: montures,
-    relationnel: relationnel,
-    pistage: pistage,
-    soins: soins,
-    territoire: territoire,
-    adresse: adresse,
-    athletisme: athletisme,
-    armurerie: armurerie,
-    discretion: discretion,
-    artisanat: artisanat,
-    flore: flore,
-    mecanisme: mecanisme,
-    vigilance: vigilance,
-    runes: runes,
-    voyage: voyage,
-    bouclier: bouclier,
-    eclats: eclats,
-    cac: cac,
-    lunes: lunes,
-    lancer: lancer,
-    mythes: mythes,
-    melee: melee,
-    pantheons: pantheons,
-    tir: tir,
-    rituels: rituels
-  };
-  competenceValue = variables2Map[compSelector.value];
-  competence = competenceValue;
-}
-
-setInterval(updateCompetence, 3000);
-setInterval(updateCaracteristique, 3000);
-
   const inputFields = document.querySelectorAll("input");
   inputFields.forEach(inputField => {
     // Add change event listener to each input field
@@ -562,82 +500,94 @@ getPersonnage(Id_Personnage)
     //  
     //Gérer les réserves :
     //
-
     var maxeffort = data[0].maxeffort;
     var maxsangfroid = data[0].maxsangfroid;
-    function reservesDisplay(maxeffort, maxsangfroid){
-    const effortBox = document.getElementById('effort');
-    for (let i = 1; i <= maxeffort; i++) {
-      const effort = document.createElement("img");
-      effort.id="effortcircle"+i;
-      effort.classList.add("circlereserve");
-      effort.src="./img/circle.png";
-      effortBox.appendChild(effort);
-    }
+    function reservesDisplay(maxeffort, maxsangfroid, effort = false, sangfroid = false){
+      const effortBox = document.getElementById('effort');
+      for (let i = 1; i <= maxeffort; i++) {
+        const effort = document.createElement("img");
+        effort.id="effortcircle"+i;
+        effort.classList.add("circlereserve");
+        effort.src="./img/circle.png";
+        effortBox.appendChild(effort);
+      }
 
-    const sangfroidBox = document.getElementById('sangfroid');
-    for (let i = 1; i <= maxsangfroid; i++) {
-      const sangfroid = document.createElement("img");
-      sangfroid.id="sangfroidcircle"+i;
-      sangfroid.classList.add("circlereserve");
-      sangfroid.src="./img/circle.png";
-      sangfroidBox.appendChild(sangfroid);
-    }
+      const sangfroidBox = document.getElementById('sangfroid');
+      for (let i = 1; i <= maxsangfroid; i++) {
+        const sangfroid = document.createElement("img");
+        sangfroid.id="sangfroidcircle"+i;
+        sangfroid.classList.add("circlereserve");
+        sangfroid.src="./img/circle.png";
+        sangfroidBox.appendChild(sangfroid);
+      }
 
-    const circleseffort = document.querySelectorAll('.circlereserve');
-    circleseffort.forEach(circle => {
-      circle.addEventListener('click', function() {
-        var id = this.id;
-        var reserve = id.substring(0, id.indexOf("circle"));
-        const match = id.match(/\d+$/);
-        var note = match ? parseInt(match[0]) : 0;
-        var thisImage = this.src;
-        thisImage = thisImage.split("/").pop().split("\\").pop();
+      const circlesReserve = document.querySelectorAll('.circlereserve');
+      circlesReserve.forEach(circle => {
+        circle.addEventListener('click', function() {
+          var id = this.id;
+          var reserve = id.substring(0, id.indexOf("circle"));
+          const match = id.match(/\d+$/);
+          var note = match ? parseInt(match[0]) : 0;
+          var thisImage = this.src;
+          thisImage = thisImage.split("/").pop().split("\\").pop();
 
-        if(reserve=="effort"){
-          var maxreserve = maxeffort;
-        }
-
-        if(reserve=="sangfroid"){
-          var maxreserve = maxsangfroid;
-        }
-
-        if(thisImage == "circlered.png" && note =="1"){
-          this.src="./img/circle.png";
-          selectReserve(reserve,0);
-          for (let i = note + 1; i <= maxreserve; i++) {
-            var tempID= id.replace(/\d+/g, "")+i;
-            document.getElementById(tempID).src = './img/circle.png';
+          if(reserve=="effort"){
+            var maxreserve = maxeffort;
           }
-        }else if(thisImage == "circle.png" && note =="1"){
-          this.src="./img/circlered.png";
-          selectReserve(reserve,note);
-          for (let i = note + 1; i <= maxreserve; i++) {
-            var tempID= id.replace(/\d+/g, "")+i;
-            document.getElementById(tempID).src = './img/circle.png';
+
+          if(reserve=="sangfroid"){
+            var maxreserve = maxsangfroid;
           }
-        }else{
-          selectReserve(reserve,note);
-          for (let i = 1; i <= note; i++) {
-            var tempID= id.replace(/\d+/g, "")+i;
-            document.getElementById(tempID).src = './img/circlered.png';
+
+          if(thisImage == "circlered.png" && note =="1"){
+            this.src="./img/circle.png";
+            selectReserve(reserve,0);
+            for (let i = note + 1; i <= maxreserve; i++) {
+              var tempID= id.replace(/\d+/g, "")+i;
+              document.getElementById(tempID).src = './img/circle.png';
+            }
+          }else if(thisImage == "circle.png" && note =="1"){
+            this.src="./img/circlered.png";
+            selectReserve(reserve,note);
+            for (let i = note + 1; i <= maxreserve; i++) {
+              var tempID= id.replace(/\d+/g, "")+i;
+              document.getElementById(tempID).src = './img/circle.png';
+            }
+          }else{
+            selectReserve(reserve,note);
+            for (let i = 1; i <= note; i++) {
+              var tempID= id.replace(/\d+/g, "")+i;
+              document.getElementById(tempID).src = './img/circlered.png';
+            }
+            for (let i = note + 1; i <= maxreserve; i++) {
+              var tempID= id.replace(/\d+/g, "")+i;
+              document.getElementById(tempID).src = './img/circle.png';
+            }
           }
-          for (let i = note + 1; i <= maxreserve; i++) {
-            var tempID= id.replace(/\d+/g, "")+i;
-            document.getElementById(tempID).src = './img/circle.png';
-          }
-        }
+        });
       });
-    });
 
-    if (data[0].effort !== 0 && data[0].effort !== null) {
-      document.getElementById('effortcircle'+data[0].effort).click();
-    }
 
-    if (data[0].sangfroid !== 0 && data[0].sangfroid !== null) {
-      document.getElementById('sangfroidcircle'+data[0].sangfroid).click();
+      if(effort){
+        if (effort !== 0 && effort !== null) {
+          document.getElementById('effortcircle'+effort).click();
+        }
+      }else{
+        if (data[0].effort !== 0 && data[0].effort !== null) {
+          document.getElementById('effortcircle'+data[0].effort).click();
+        }
+      }
+      
+      if(sangfroid){
+        if (sangfroid !== 0 && sangfroid !== null) {
+          document.getElementById('sangfroidcircle'+sangfroid).click();
+        }
+      }else{
+        if (data[0].sangfroid !== 0 && data[0].sangfroid !== null) {
+          document.getElementById('sangfroidcircle'+data[0].sangfroid).click();
+        }
+      }
     }
-  }
 
   reservesDisplay(maxeffort, maxsangfroid);
     //  
@@ -734,8 +684,6 @@ getPersonnage(Id_Personnage)
     }
     blessureDisplay(maxblessurelegere, maxblessuregrave, maxblessuremortelle);
 
-   
-
     function reserveClear(){
       const circleReserves= document.getElementsByClassName('circlereserve');
       while (circleReserves.length > 0) {
@@ -797,7 +745,7 @@ getPersonnage(Id_Personnage)
           updatePersonnageField(Id_Personnage, "maxsangfroid", maxsangfroid);
         }
         reserveClear();
-        reservesDisplay(maxeffort, maxsangfroid);
+        reservesDisplay(maxeffort, maxsangfroid, effort, sangfroid);
       });
     });
    
@@ -806,8 +754,257 @@ getPersonnage(Id_Personnage)
     console.error(error);
   });
 
+
+
+  const caracSelector = document.getElementById("caracteristique");
+  caracSelector.addEventListener("change", function(event) {
+    updateCaracteristique();
+  });
+  function updateCaracteristique(){
+    const variablesMap = {
+      puissance: puissance,
+      precicion: precicion,
+      connaissance: connaissance,
+      volonte: volonte,
+      resistance: resistance,
+      reflexes: reflexes,
+      perception: perception,
+      empathie: empathie
+    };
+  
+    switch(caracSelector.options[caracSelector.selectedIndex].text){
+      case "Puissance":
+        caracteristiqueMalusValue = document.getElementById("malusphysique").value;
+        break;
+      case "Resistance":
+        caracteristiqueMalusValue = document.getElementById("malusphysique").value;
+        break;
+  
+      case "Precision":
+        caracteristiqueMalusValue = document.getElementById("malusmanuel").value;
+        break;
+      case "Reflexes":
+        caracteristiqueMalusValue = document.getElementById("malusmanuel").value;
+        break;
+  
+      case "Connaissance":
+        caracteristiqueMalusValue = document.getElementById("malussocial").value;
+        break;
+      case "Perception":
+        caracteristiqueMalusValue = document.getElementById("malussocial").value;
+        break;
+  
+      case "Empathie":
+        caracteristiqueMalusValue = document.getElementById("malusmental").value;
+        break;
+      case "Volonte":
+        caracteristiqueMalusValue = document.getElementById("malusmental").value;
+        break;
+      default:
+        console.log("pastrouvé la caracteristiquemalus");
+    }
+    caracteristiqueValue = variablesMap[caracSelector.value];
+    caracteristique = caracteristiqueValue;
+    caracteristiqueMalus = caracteristiqueMalusValue;
+  }
+  
+  
+  const compSelector = document.getElementById("competence");
+  compSelector.addEventListener("change", function(event) {
+    updateCompetence();
+  });
+  
+  function updateCompetence(){
+    const variables2Map = {
+      arts: arts,
+      animalisme: animalisme,
+      cite: cite,
+      faune: faune,
+      civilisations: civilisations,
+      montures: montures,
+      relationnel: relationnel,
+      pistage: pistage,
+      soins: soins,
+      territoire: territoire,
+      adresse: adresse,
+      athletisme: athletisme,
+      armurerie: armurerie,
+      discretion: discretion,
+      artisanat: artisanat,
+      flore: flore,
+      mecanisme: mecanisme,
+      vigilance: vigilance,
+      runes: runes,
+      voyage: voyage,
+      bouclier: bouclier,
+      eclats: eclats,
+      cac: cac,
+      lunes: lunes,
+      lancer: lancer,
+      mythes: mythes,
+      melee: melee,
+      pantheons: pantheons,
+      tir: tir,
+      rituels: rituels
+    };
+  
+    switch(compSelector.options[compSelector.selectedIndex].text){
+      case "Arts":
+        competenceMalusValue = document.getElementById("malushumain").value;
+        break;
+  
+      case "Cite":
+        competenceMalusValue = document.getElementById("malushumain").value;
+        break;
+  
+      case "Civilisations":
+        competenceMalusValue = document.getElementById("malushumain").value;
+        break;
+  
+      case "Relationnel":
+        competenceMalusValue = document.getElementById("malushumain").value;
+        break;
+  
+      case "Soins":
+        competenceMalusValue = document.getElementById("malushumain").value;
+        break;
+  
+  
+  
+      case "Animalisme":
+        competenceMalusValue = document.getElementById("malusanimal").value;
+        break;
+  
+      case "Faune":
+        competenceMalusValue = document.getElementById("malusanimal").value;
+        break;
+  
+      case "Montures":
+        competenceMalusValue = document.getElementById("malusanimal").value;
+        break;
+  
+      case "Pistage":
+        competenceMalusValue = document.getElementById("malusanimal").value;
+        break;
+  
+      case "Territoire":
+        competenceMalusValue = document.getElementById("malusanimal").value;
+        break;
+  
+  
+  
+      case "Adresse":
+        competenceMalusValue = document.getElementById("malusoutils").value;
+        break;
+  
+      case "Armurerie":
+        competenceMalusValue = document.getElementById("malusoutils").value;
+        break;
+  
+      case "Artisanat":
+        competenceMalusValue = document.getElementById("malusoutils").value;
+        break;
+  
+      case "Mecanisme":
+        competenceMalusValue = document.getElementById("malusoutils").value;
+        break;
+  
+      case "Runes":
+        competenceMalusValue = document.getElementById("malusoutils").value;
+        break;
+  
+      
+      
+      case "Athletisme":
+        competenceMalusValue = document.getElementById("malusterres").value;
+        break;
+  
+      case "Discretion":
+        competenceMalusValue = document.getElementById("malusterres").value;
+        break;
+  
+      case "Flore":
+        competenceMalusValue = document.getElementById("malusterres").value;
+        break;
+  
+      case "Vigilance":
+        competenceMalusValue = document.getElementById("malusterres").value;
+        break;
+  
+      case "Voyage":
+        competenceMalusValue = document.getElementById("malusterres").value;
+        break;
+  
+  
+  
+      case "Bouclier":
+        competenceMalusValue = document.getElementById("malusarme").value;
+        break;
+  
+      case "Cac":
+        competenceMalusValue = document.getElementById("malusarme").value;
+        break;
+  
+      case "Lance":
+        competenceMalusValue = document.getElementById("malusarme").value;
+        break;
+  
+      case "Melee":
+        competenceMalusValue = document.getElementById("malusarme").value;
+        break;
+  
+      case "Tir":
+        competenceMalusValue = document.getElementById("malusarme").value;
+        break;
+  
+  
+  
+      case "Eclats":
+        competenceMalusValue = document.getElementById("malusinconnu").value;
+        break;
+  
+      case "Lunes":
+        competenceMalusValue = document.getElementById("malusinconnu").value;
+        break;
+  
+      case "Mythes":
+        competenceMalusValue = document.getElementById("malusinconnu").value;
+        break;
+  
+      case "Pantheons":
+        competenceMalusValue = document.getElementById("malusinconnu").value;
+        break;
+  
+      case "Rituels":
+        competenceMalusValue = document.getElementById("malusinconnu").value;
+        break;
+      default:
+        console.log("pas trouvé la competencemalus");
+    }
+    competenceValue = variables2Map[compSelector.value];
+    competence = competenceValue;
+    competenceMalus = competenceMalusValue;
+  }
+
+  const modifierDices = document.getElementById("modifierDices");
+  
+  function updateModifier(){
+    modifierValue = modifierDices.value;
+    modifier = modifierValue;
+  } 
+
+  setInterval(updateCompetence, 500);
+  setInterval(updateCaracteristique, 500);
+  setInterval(updateModifier, 500);
+  
+
   return Promise.resolve();
 };
 
 export var caracteristique = caracteristiqueValue;
 export var competence = competenceValue;
+
+export var caracteristiqueMalus = caracteristiqueMalusValue;
+export var competenceMalus= competenceMalusValue;
+
+export var modifier= modifierValue;

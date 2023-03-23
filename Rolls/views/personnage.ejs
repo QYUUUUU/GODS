@@ -851,49 +851,50 @@
     <div id="content" class="content modal-content">
       <img class="redcross" id="redcross" src="./img/redcross.png" />
 		  <div id="ThreeJS" style="position: absolute; left:0px; top:0px"></div>
-      <div id="ui-controls" class="ui-controls">
+      <nput id="ui-controls" class="ui-controls">
         <select name="caracteristique" id="caracteristique">
-          <option value="puissance">Puissance</option>
-          <option value="precision">Précision</option>
-          <option value="connaissance">Connaissance</option>
-          <option value="volonte">Volonté</option>
-          <option value="resistance">Résistance</option>
-          <option value="reflexes">Réflexes</option>
-          <option value="perception">Perception</option>
-          <option value="empathie">Empathie</option>
+          <option value="puissance" name="puissance">Puissance</option>
+          <option value="precision" name="precision">Précision</option>
+          <option value="connaissance" name="connaissance">Connaissance</option>
+          <option value="volonte" name="volonte">Volonté</option>
+          <option value="resistance" name="resistance">Résistance</option>
+          <option value="reflexes" name="reflexes">Réflexes</option>
+          <option value="perception" name="perception">Perception</option>
+          <option value="empathie" name="empathie">Empathie</option>
         </select>
         <select name="competence" id="competence">
-          <option value="arts">Arts</option>
-          <option value="animalisme">Animalisme</option>
-          <option value="cite">Cité</option>
-          <option value="faune">Faune</option>
-          <option value="civilisations">Civilisations</option>
-          <option value="montures">Montures</option>
-          <option value="relationnel">Relationnel</option>
-          <option value="pistage">Pistage</option>
-          <option value="soins">Soins</option>
-          <option value="territoire">Territoire</option>
-          <option value="adresse">Adresse</option>
-          <option value="athletisme">Athlétisme</option>
-          <option value="armurerie">Armurerie</option>
-          <option value="discretion">Discrétion</option>
-          <option value="artisanat">Artisanat</option>
-          <option value="flore">Flore</option>
-          <option value="mecanisme">Mécanisme</option>
-          <option value="vigilance">Vigilance</option>
-          <option value="runes">Runes</option>
-          <option value="voyage">Voyage</option>
-          <option value="bouclier">Bouclier</option>
-          <option value="eclats">Eclats</option>
-          <option value="cac">CAC</option>
-          <option value="lunes">Lunes</option>
-          <option value="lancer">Lancer</option>
-          <option value="mythes">Mythes</option>
-          <option value="melee">Mêlée</option>
-          <option value="pantheons">Pantheons</option>
-          <option value="tir">Tir</option>
-          <option value="rituels">Rituels</option>
+          <option value="arts" name="arts">Arts</option>
+          <option value="animalisme" name="animalisme">Animalisme</option>
+          <option value="cite" name="cite">Cité</option>
+          <option value="faune" name="faune">Faune</option>
+          <option value="civilisations" name="civilisations">Civilisations</option>
+          <option value="montures" name="montures">Montures</option>
+          <option value="relationnel" name="relationnel">Relationnel</option>
+          <option value="pistage" name="pistage">Pistage</option>
+          <option value="soins" name="soins">Soins</option>
+          <option value="territoire" name="territoire">Territoire</option>
+          <option value="adresse" name="adresse">Adresse</option>
+          <option value="athletisme" name="athletisme">Athlétisme</option>
+          <option value="armurerie" name="armurerie">Armurerie</option>
+          <option value="discretion" name="discretion">Discrétion</option>
+          <option value="artisanat" name="artisanat">Artisanat</option>
+          <option value="flore" name="flore">Flore</option>
+          <option value="mecanisme" name="mecanisme">Mécanisme</option>
+          <option value="vigilance" name="vigilance">Vigilance</option>
+          <option value="runes" name="runes">Runes</option>
+          <option value="voyage" name="voyage">Voyage</option>
+          <option value="bouclier" name="bouclier">Bouclier</option>
+          <option value="eclats" name="eclats">Eclats</option>
+          <option value="cac" name="cac">CAC</option>
+          <option value="lunes" name="lunes">Lunes</option>
+          <option value="lancer" name="lancer">Lancer</option>
+          <option value="mythes" name="mythes">Mythes</option>
+          <option value="melee" name="melee">Mêlée</option>
+          <option value="pantheons" name="pantheons">Pantheons</option>
+          <option value="tir" name="tir">Tir</option>
+          <option value="rituels" name="rituels">Rituels</option>
         </select>
+        <input id="modifierDices" type="number" value="0">
         <div class="score">Score: <span id="score-result"></span></div>
         <ul class="tips"></ul>
         <button id="roll-btn" class="button">Throw the dice</button>

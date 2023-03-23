@@ -1,5 +1,5 @@
 import { DiceManager, DiceD10 } from '../node_modules/threejs-dice/lib/dice.js';
-import { buildPage, caracteristique, competence } from './personnage.js';
+import { buildPage, caracteristique, competence, competenceMalus, caracteristiqueMalus, modifier } from './personnage.js';
 //Config de lancement de dés
 buildPage();
 
@@ -7,10 +7,10 @@ var number;
 var rethrows;
 
 function calculate(rethrow){
-    number = caracteristique;
-    rethrows = 0;
+    number = parseInt(caracteristique) + parseInt(caracteristiqueMalus) + parseInt(competenceMalus) + parseInt(modifier);
 
-    switch(competence){
+    rethrows = 0;
+   switch(competence){
         case 0:
             break;
         case 1:
@@ -68,7 +68,6 @@ function calculate(rethrow){
         });
     
     }
-
     return [number,rethrows];
 }
 
@@ -146,6 +145,19 @@ function init()
     let floorBody = new CANNON.Body({mass: 0, shape: new CANNON.Plane(), material: DiceManager.floorBodyMaterial});
     floorBody.quaternion.setFromAxisAngle(new CANNON.Vec3(1, 0, 0), -Math.PI / 2);
     world.add(floorBody);
+    
+    function onWindowResize() {
+        var SCREEN_WIDTH = window.innerWidth;
+        var SCREEN_HEIGHT = window.innerHeight;
+        var aspect = SCREEN_WIDTH / SCREEN_HEIGHT;
+    
+        camera.aspect = aspect;
+        camera.updateProjectionMatrix();
+    
+        renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
+    }
+    
+    window.addEventListener( 'resize', onWindowResize, false );
 
     function randomDiceThrow(rethrow = false) {
         //Récuperer le nombre de dés à lancer
