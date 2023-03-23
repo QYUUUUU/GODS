@@ -28,6 +28,9 @@ app.use(session({
 // Enable CORS
 app.use(cors());
 
+app.use(express.json({limit: '50mb'}));
+app.use(express.urlencoded({limit: '50mb'}));
+
 const getProfil = (pseudo, callback) => {
   // Write the SQL query
   const query = `SELECT * FROM profil WHERE pseudo = "${pseudo}"`;
@@ -212,6 +215,30 @@ const associateCharacterProfil = (userId, characterId, callback) => {
   });
 };
 
+const setThrow = (diceValues, Id_Personnage, callback) => {
+
+  // Write the SQL query
+  const query = `INSERT INTO \`throws\` (\`Id_Throws\`, \`diceValues\`, \`Id_Personnage\`) VALUES (?, ?, ?)`;
+  const values = [null, diceValues, Id_Personnage];
+
+  // Get a connection from the pool and execute the query
+  pool.getConnection((err, connection) => {
+    if (err) {
+      console.error("Error getting connection: " + err.stack);
+      return;
+    }
+
+    connection.query(query, values, (error, results) => {
+      connection.release(); // Release the connection back to the pool
+
+      if (error) {
+        console.error("Error executing query: " + error.stack);
+        return;
+      }
+      callback(results);
+    });
+  });
+};
 
 
 app.get("/newcharacter/:id", (req, res) => {
@@ -240,7 +267,6 @@ app.put('/personnage/:id/:field/:value', (req, res) => {
     res.send(results);
   });
 });
-
 
 app.get('/profilconnexion', (req, res) => {
   const { pseudo, pass } = req.query;
@@ -347,6 +373,21 @@ app.get('/characterslist', (req, res) => {
 });
 
 
+app.get("/throws", (req, res) => {
+  const id = req.params.id;
+  getThrows(id, (results) => {
+      res.send(results);
+  });
+});
+
+
+// Route POST qui appelle setThrow avec les données du corps de la requête
+app.put('/throws/new', (req, res) => {
+  const { diceValues, Id_Personnage } = req.body;
+  setThrow(diceValues, Id_Personnage, (results) => {
+    res.send(results);
+});
+});
 
 // Start the server
 const PORT = process.env.PORT || 4000;

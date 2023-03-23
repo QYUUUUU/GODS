@@ -198,7 +198,7 @@ function init()
             dice.push(die);
         }
         var diceValues = [];
-    
+        var trimmedValues = [];
         for (var i = 0; i < dice.length; i++) {
             let yRand = Math.random() * 20
             dice[i].getObject().position.x = -15 - (i % 3) * 1.5;
@@ -212,9 +212,11 @@ function init()
             dice[i].getObject().body.angularVelocity.set(20 * Math.random() -10, 20 * Math.random() -10, 20 * Math.random() -10);
     
             let value = Math.floor(Math.random() * 10) + 1; // generate a random integer between 1 and 10
+            // trimmedValues.push({value});
+            trimmedValues.push({dice: dice[i].constructor.name, value: value});
             diceValues.push({dice: dice[i], value: value});
         }
-        loggingdices(diceValues);
+        addThrow(trimmedValues);
         DiceManager.prepareValues(diceValues);
         
     }
@@ -254,9 +256,6 @@ function render()
 	renderer.render( scene, camera );
 }
 
-function loggingdices(){
-
-}
 
 
 
@@ -285,3 +284,24 @@ competencePicker.addEventListener("change",()=>{
     }
 });
 
+
+async function addThrow(diceValues){    
+    
+    //Ajoute les valeurs au dashboard commun
+    try {
+        const response = await fetch(`/throws/new/`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ diceValues: JSON.stringify(diceValues), Id_Personnage })
+        });
+        if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error(error);
+    }
+}

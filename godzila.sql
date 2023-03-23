@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : mar. 21 mars 2023 à 16:28
+-- Généré le : jeu. 23 mars 2023 à 18:54
 -- Version du serveur : 10.9.3-MariaDB
 -- Version de PHP : 8.1.10
 
@@ -38,13 +38,6 @@ CREATE TABLE `control` (
 
 INSERT INTO `control` (`Id_Personnage`, `Id_Profil`) VALUES
 (2, 2),
-(12, 2),
-(13, 2),
-(14, 2),
-(15, 2),
-(16, 2),
-(17, 2),
-(18, 2),
 (19, 1),
 (20, 2);
 
@@ -132,15 +125,8 @@ CREATE TABLE `personnage` (
 INSERT INTO `personnage` (`Id_Personnage`, `nom`, `age`, `genre`, `instinct`, `signeastro`, `origine`, `reputation`, `depensee`, `totale`, `puissance`, `resistance`, `precicion`, `reflexes`, `connaissance`, `perception`, `volonte`, `arts`, `cite`, `civilisations`, `relationnel`, `soins`, `animalisme`, `faune`, `montures`, `pistage`, `territoire`, `adresse`, `armurerie`, `artisanat`, `mecanisme`, `runes`, `athletisme`, `discretion`, `flore`, `vigilance`, `voyage`, `bouclier`, `cac`, `lancer`, `melee`, `tir`, `eclats`, `lunes`, `mythes`, `pantheons`, `rituels`, `malusphysique`, `malusmanuel`, `malussocial`, `malushumain`, `malusanimal`, `malusoutils`, `malusterres`, `malusarme`, `malusinconnu`, `malusmental`, `empathie`, `maxblessurelegere`, `blessurelegere`, `maxblessuregrave`, `blessuregrave`, `maxblessuremortelle`, `blessuremortelle`, `maxeffort`, `effort`, `maxsangfroid`, `sangfroid`) VALUES
 (1, 'Jo', '12', 'L', 'Gardien', 'dfh', 'dfh', NULL, 0, 12, 3, 1, 1, 3, 3, 3, 3, 6, 1, 1, 4, 3, 0, 1, 2, 4, 0, 0, 1, 4, 2, 3, 1, 0, 2, 6, 2, 3, 6, 2, 5, 1, 2, 4, 2, 5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 7, 4, 5, 4, 4, 3, 14, 13, 11, 10),
 (2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, 4, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(12, 'Kimono', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, 4, 4, NULL, 4, NULL, NULL, 5, 1, 1, 2, 1, 1, 4, 3, 2, 3, 5, 3, 1, 6, 1, 1, 3, 1, 5, 4, 4, 2, 6, 4, 5, 3, 1, 4, 1, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 9, 8, 10, 4, 11, 3, 8, 5, 9, 6),
-(13, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 4, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(14, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(15, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(16, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(17, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(18, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (19, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(20, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, 3, 3, 1, 8, 4, 11, 5);
+(20, 'Jamais', 'Jamais', 'Jamaaais', 'Jamais', 'Jamais', 'Jamaiiiis', NULL, NULL, NULL, 2, 4, 5, 3, 3, 3, 5, 3, 4, 4, 4, 5, 3, 4, 5, 4, 3, 6, 5, 4, 3, 2, 2, 1, 2, 3, 4, 1, 2, 3, 4, 5, 5, 3, 1, 5, 3, 4, 0, 0, 5, 6, 15, 6, NULL, NULL, 0, 2, 7, 3, 8, 5, 6, 3, 10, 5, 13, 5);
 
 -- --------------------------------------------------------
 
@@ -161,6 +147,26 @@ CREATE TABLE `profil` (
 INSERT INTO `profil` (`Id_Profil`, `pseudo`, `passw`) VALUES
 (1, 'mesmerde', '4c28ac101d0679d0485e61f6e723524798fb0163b907d4c78a4bbbfdfa3ec10e'),
 (2, 'alex', '8368f1eabc65555d0f89a5b7574d6e6d22f5e3cb22756208779e4e7f1ddf4b15');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `throws`
+--
+
+CREATE TABLE `throws` (
+  `Id_Throws` int(11) NOT NULL,
+  `diceValues` text DEFAULT NULL,
+  `Id_Personnage` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `throws`
+--
+
+INSERT INTO `throws` (`Id_Throws`, `diceValues`, `Id_Personnage`) VALUES
+(3, '[{\"dice\":\"DiceD10\",\"value\":7},{\"dice\":\"DiceD10\",\"value\":2},{\"dice\":\"DiceD10\",\"value\":8},{\"dice\":\"DiceD10\",\"value\":2},{\"dice\":\"DiceD10\",\"value\":7},{\"dice\":\"DiceD10\",\"value\":9},{\"dice\":\"DiceD10\",\"value\":10},{\"dice\":\"DiceD10\",\"value\":1},{\"dice\":\"DiceD10\",\"value\":2},{\"dice\":\"DiceD10\",\"value\":6},{\"dice\":\"DiceD10\",\"value\":8},{\"dice\":\"DiceD10\",\"value\":4},{\"dice\":\"DiceD10\",\"value\":8}]', 20),
+(4, '[{\"dice\":\"DiceD10\",\"value\":5},{\"dice\":\"DiceD10\",\"value\":3},{\"dice\":\"DiceD10\",\"value\":3},{\"dice\":\"DiceD10\",\"value\":10},{\"dice\":\"DiceD10\",\"value\":10},{\"dice\":\"DiceD10\",\"value\":2},{\"dice\":\"DiceD10\",\"value\":5},{\"dice\":\"DiceD10\",\"value\":7},{\"dice\":\"DiceD10\",\"value\":5},{\"dice\":\"DiceD10\",\"value\":3},{\"dice\":\"DiceD10\",\"value\":7},{\"dice\":\"DiceD10\",\"value\":4},{\"dice\":\"DiceD10\",\"value\":10}]', 20);
 
 --
 -- Index pour les tables déchargées
@@ -186,6 +192,13 @@ ALTER TABLE `profil`
   ADD PRIMARY KEY (`Id_Profil`);
 
 --
+-- Index pour la table `throws`
+--
+ALTER TABLE `throws`
+  ADD PRIMARY KEY (`Id_Throws`),
+  ADD KEY `Id_Personnage` (`Id_Personnage`);
+
+--
 -- AUTO_INCREMENT pour les tables déchargées
 --
 
@@ -202,6 +215,12 @@ ALTER TABLE `profil`
   MODIFY `Id_Profil` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT pour la table `throws`
+--
+ALTER TABLE `throws`
+  MODIFY `Id_Throws` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- Contraintes pour les tables déchargées
 --
 
@@ -211,6 +230,12 @@ ALTER TABLE `profil`
 ALTER TABLE `control`
   ADD CONSTRAINT `control_ibfk_1` FOREIGN KEY (`Id_Personnage`) REFERENCES `personnage` (`Id_Personnage`),
   ADD CONSTRAINT `control_ibfk_2` FOREIGN KEY (`Id_Profil`) REFERENCES `profil` (`Id_Profil`);
+
+--
+-- Contraintes pour la table `throws`
+--
+ALTER TABLE `throws`
+  ADD CONSTRAINT `throws_ibfk_1` FOREIGN KEY (`Id_Personnage`) REFERENCES `personnage` (`Id_Personnage`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
