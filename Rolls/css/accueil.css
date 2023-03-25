@@ -202,160 +202,170 @@
 
 .content{
     position: relative;
-    height: 80vh;
-    width: 80vw;
+    height: 80%;
+    width: 80%;
     overflow: hidden;
 }
   
-  #overlay {
-    height: 100%;
-    width: 100%;
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 999;
-    display: none; /* Hide by default */
-  }
-  
-  #overlay.show {
-    display: block; /* Show when the class is toggled */
-  }
-  
-  #overlay .content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    max-height: 90vh;
-    overflow-y: none;
-  }
+#overlay {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 500;
+  overflow-x: hidden;
+  transition: 0.5s;
+}
 
-  .ui-controls {
-    position: absolute;
-    top: 25%;
-    left: 25%;
-    z-index: 1;
-    /* other styles */
-  }
+#overlay.show {
+  width: 100%;
+  right: 0;
+}
 
-  canvas {
-    position: relative;
-    z-index: 0;
-    /* other styles */
-  }
+#overlay .modal-content {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  padding: 20px;
+  transform: translateX(100%);
+  transition: 0.5s;
+}
 
-  .button {
-    background-image: url("../img/modale.png");
-    background-size: cover;
-    color: #000000;
-    font-weight: bold;
-    font-size: 20px;
-    text-transform: uppercase;
-    border: none;
-    padding: 10px 20px;
-    position: relative;
-    overflow: hidden;
-    display: inline-block;
-    vertical-align: middle;
-    cursor: pointer;
-    font-family: 'Marker Felt', cursive;
-  }
-  
-  .button:before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: -1;
-  }
-  
-  .button:hover:before {
-    opacity: 0.7;
-  }
-
-  #blessurelegere{
-    max-width: 143px;
-  }
-
-  #blessuregrave{
-    max-width: 143px;
-  }
-
-  #blessuremortelle{
-    max-width: 143px;
-  }
-
-  .circleblessure {
-    height: 20px;
-    width: 20px;
-    position: relative;
-    z-index: 99;
-  }
-
-  .circlereserve {
-    height: 20px;
-    width: 20px;
-    position: relative;
-    z-index: 99;
-  }
+#overlay.show .modal-content {
+  transform: translateX(0%);
+}
 
 
-  .dual-button {
-    display: inline-block;
-    border: none;
-    cursor: pointer;
-    font-weight: bold;
-    text-decoration: none;
-    margin: 0;
-    width: 10px;
-    height: 10px;
-    font-size: 10px;
-  }
- 
-  
-  .left-button:hover {
-    background-color: #aaa;
-  }
-  
-  .right-button:hover {
-    background-color: #aaa;
-  }
-  
-  .blessurestype {
-    text-align: center;
-  }
+.ui-controls {
+  position: absolute;
+  top: 25%;
+  left: 25%;
+  z-index: 1;
+  /* other styles */
+}
 
-  .increments{
-    width: 10px;
-    height: 10px;
-    font-size: 10px;
-    padding: none;
-    position: relative;
-    z-index: 99;
-  }
+canvas {
+  position: relative;
+  z-index: 0;
+  /* other styles */
+}
 
-  .incrementsreserve{
-    width: 10px;
-    height: 10px;
-    font-size: 10px;
-    padding: none;
-    position: relative;
-    z-index: 99;
-  }
+.button {
+  background-image: url("../img/modale.png");
+  background-size: cover;
+  color: #000000;
+  font-weight: bold;
+  font-size: 20px;
+  text-transform: uppercase;
+  border: none;
+  padding: 10px 20px;
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  vertical-align: middle;
+  cursor: pointer;
+  font-family: 'Marker Felt', cursive;
+}
 
-  .alilhigher{
-    margin-top: -10px;
-  }
+.button:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: -1;
+}
 
-  #original-content > div.container-fluid > div > div > div.card > div > div:nth-child(36) > div.col-6.blessurestype.row.justify-content-center > div:nth-child(3){
-    min-width: 170px;
-  }
+.button:hover:before {
+  opacity: 0.7;
+}
+
+#blessurelegere{
+  max-width: 143px;
+}
+
+#blessuregrave{
+  max-width: 143px;
+}
+
+#blessuremortelle{
+  max-width: 143px;
+}
+
+.circleblessure {
+  height: 20px;
+  width: 20px;
+  position: relative;
+  z-index: 99;
+}
+
+.circlereserve {
+  height: 20px;
+  width: 20px;
+  position: relative;
+  z-index: 99;
+}
+
+
+.dual-button {
+  display: inline-block;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  text-decoration: none;
+  margin: 0;
+  width: 10px;
+  height: 10px;
+  font-size: 10px;
+}
+
+
+.left-button:hover {
+  background-color: #aaa;
+}
+
+.right-button:hover {
+  background-color: #aaa;
+}
+
+.blessurestype {
+  text-align: center;
+}
+
+.increments{
+  width: 10px;
+  height: 10px;
+  font-size: 10px;
+  padding: none;
+  position: relative;
+  z-index: 99;
+}
+
+.incrementsreserve{
+  width: 10px;
+  height: 10px;
+  font-size: 10px;
+  padding: none;
+  position: relative;
+  z-index: 99;
+}
+
+.alilhigher{
+  margin-top: -10px;
+}
+
+#original-content > div.container-fluid > div > div > div.card > div > div:nth-child(36) > div.col-6.blessurestype.row.justify-content-center > div:nth-child(3){
+  min-width: 170px;
+}
 
 .rightside{
   position: absolute;
@@ -366,9 +376,14 @@
   position: absolute;
   height: 35px;
   width: 35px;
-  z-index: 99;
+  z-index: 999;
 }
 
 #modifierDices{
   width: 50px;
+}
+
+
+body > nav{
+  z-index: 600;
 }

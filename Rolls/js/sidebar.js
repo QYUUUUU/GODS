@@ -8,9 +8,20 @@ openOverlayBtn.addEventListener("click", () => {
   originalContent.classList.toggle("show");
 });
 
-
-
 redcross.addEventListener("click", ()=>{
   overlay.classList.toggle("show");
   originalContent.classList.toggle("show");
+});
+
+
+const malusList = document.querySelectorAll(".malus");
+malusList.forEach(malus => {
+  if(malus.value == null || malus.value==""){
+    malus.value = 0;
+  }
+  malus.addEventListener("change",()=>{
+    if(malus.value == null || malus.value==""){
+      malus.value = 0;
+    }
+  });
 });

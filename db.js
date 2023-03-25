@@ -8,10 +8,10 @@ const session = require('express-session');
 
 // Create a MySQL connection pool
 const pool = mysql.createPool({
-  connectionLimit: 10,
+  connectionLimit: 40,
   host: 'localhost',
   user: 'root',
-  password: 'root',
+  password: '',
   database: 'godzila'
 });
 
