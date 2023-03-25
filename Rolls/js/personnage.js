@@ -4,6 +4,13 @@ var caracteristiqueMalusValue;
 var competenceMalusValue;
 var modifierValue;
 
+var effort = 0;
+var sangfroid = 0;
+
+var legere = 0;
+var grave = 0;
+var mortelle = 0;
+
 export function buildPage() {
 const losanges = document.querySelectorAll('.losange');
 async function processLosanges() {
@@ -25,9 +32,6 @@ async function processLosanges() {
 }
 processLosanges();
 
-var legere = 0;
-var grave = 0;
-var mortelle = 0;
 function selectBlessure(blessure, note) {
   switch (blessure) {
     case "legere":
@@ -45,14 +49,12 @@ function selectBlessure(blessure, note) {
 
 
 
-var effort = 0;
-var sangfroid = 0;
 function selectReserve(reserve, note) {
   switch (reserve) {
     case "effort":
       effort = note;
       break;
-    case "grave":
+    case "sangfroid":
       sangfroid = note;
       break;
   }
@@ -496,29 +498,31 @@ getPersonnage(Id_Personnage)
       document.getElementById('montureslosange'+data[0].montures).click();
     }
 
-
     //  
     //Gérer les réserves :
     //
     var maxeffort = data[0].maxeffort;
     var maxsangfroid = data[0].maxsangfroid;
-    function reservesDisplay(maxeffort, maxsangfroid, effort = false, sangfroid = false){
+    effort = data[0].effort;
+    sangfroid = data[0].sangfroid;
+    function reservesDisplay(maxeffort, maxsangfroid, effort, sangfroid){
+
       const effortBox = document.getElementById('effort');
       for (let i = 1; i <= maxeffort; i++) {
-        const effort = document.createElement("img");
-        effort.id="effortcircle"+i;
-        effort.classList.add("circlereserve");
-        effort.src="./img/circle.png";
-        effortBox.appendChild(effort);
+        const effortCircle = document.createElement("img");
+        effortCircle.id="effortcircle"+i;
+        effortCircle.classList.add("circlereserve");
+        effortCircle.src="./img/circle.png";
+        effortBox.appendChild(effortCircle);
       }
 
       const sangfroidBox = document.getElementById('sangfroid');
       for (let i = 1; i <= maxsangfroid; i++) {
-        const sangfroid = document.createElement("img");
-        sangfroid.id="sangfroidcircle"+i;
-        sangfroid.classList.add("circlereserve");
-        sangfroid.src="./img/circle.png";
-        sangfroidBox.appendChild(sangfroid);
+        const sangfroidCircle = document.createElement("img");
+        sangfroidCircle.id="sangfroidcircle"+i;
+        sangfroidCircle.classList.add("circlereserve");
+        sangfroidCircle.src="./img/circle.png";
+        sangfroidBox.appendChild(sangfroidCircle);
       }
 
       const circlesReserve = document.querySelectorAll('.circlereserve');
@@ -596,32 +600,37 @@ getPersonnage(Id_Personnage)
     var maxblessurelegere = data[0].maxblessurelegere;
     var maxblessuregrave = data[0].maxblessuregrave;
     var maxblessuremortelle = data[0].maxblessuremortelle;
-    function blessureDisplay(maxblessurelegere, maxblessuregrave, maxblessuremortelle){
+
+    legere = data[0].blessurelegere;
+    grave = data[0].blessuregrave;
+    mortelle = data[0].blessuremortelle;
+    
+    function blessureDisplay(maxblessurelegere, maxblessuregrave, maxblessuremortelle, legere, grave, mortelle){
       const blessurelegereBox = document.getElementById('blessurelegere');
       for (let i = 1; i <= maxblessurelegere; i++) {
-        const blessure = document.createElement("img");
-        blessure.id="legerecircle"+i;
-        blessure.classList.add("circleblessure");
-        blessure.src="./img/circle.png";
-        blessurelegereBox.appendChild(blessure);
+        const legerereCircle = document.createElement("img");
+       legerereCircle.id="legerecircle"+i;
+       legerereCircle.classList.add("circleblessure");
+       legerereCircle.src="./img/circle.png";
+        blessurelegereBox.appendChild(legerereCircle);
       }
   
       const blessuregraveBox = document.getElementById('blessuregrave');
       for (let i = 1; i <= maxblessuregrave; i++) {
-        const blessure = document.createElement("img");
-        blessure.id="gravecircle"+i;
-        blessure.classList.add("circleblessure");
-        blessure.src="./img/circle.png";
-        blessuregraveBox.appendChild(blessure);
+        const graveCircle = document.createElement("img");
+        graveCircle.id="gravecircle"+i;
+        graveCircle.classList.add("circleblessure");
+        graveCircle.src="./img/circle.png";
+        blessuregraveBox.appendChild(graveCircle);
       }
   
       const blessuremortelleBox = document.getElementById('blessuremortelle');
       for (let i = 1; i <= maxblessuremortelle; i++) {
-        const blessure = document.createElement("img");
-        blessure.id="mortellecircle"+i;
-        blessure.classList.add("circleblessure");
-        blessure.src="./img/circle.png";
-        blessuremortelleBox.appendChild(blessure);
+        const mortelleCircle = document.createElement("img");
+        mortelleCircle.id="mortellecircle"+i;
+        mortelleCircle.classList.add("circleblessure");
+        mortelleCircle.src="./img/circle.png";
+        blessuremortelleBox.appendChild(mortelleCircle);
       }
   
       const circlesblessure = document.querySelectorAll('.circleblessure');
@@ -669,16 +678,42 @@ getPersonnage(Id_Personnage)
         });
       });
   
-      if (data[0].blessurelegere !== 0 && data[0].blessurelegere !== null) {
-        document.getElementById('legerecircle'+data[0].blessurelegere).click();
+
+      if(legere){
+        if (legere !== 0 && legere !== null) {
+          console.log("lost in the speed");
+          document.getElementById('legerecircle'+legere).click();
+        }
+      }else{
+        console.log("of the dawn");
+        if (data[0].blessurelegere !== 0 && data[0].blessurelegere !== null) {
+          document.getElementById('legerecircle'+data[0].blessurelegere).click();
+        }
       }
-  
-      if (data[0].blessuregrave !== 0 && data[0].blessuregrave !== null) {
-        document.getElementById('gravecircle'+data[0].blessuregrave).click();
+
+
+      if(grave){
+        if (grave !== 0 && grave !== null) {
+          console.log("lost in the speed");
+          document.getElementById('gravecircle'+grave).click();
+        }
+      }else{
+        console.log("of the dawn");
+        if (data[0].blessuregrave !== 0 && data[0].blessuregrave !== null) {
+          document.getElementById('gravecircle'+data[0].blessuregrave).click();
+        }
       }
-  
-      if (data[0].blessuremortelle !== 0 && data[0].blessuremortelle !== null) {
-        document.getElementById('mortellecircle'+data[0].blessuremortelle).click();
+
+      if(mortelle){
+        if (mortelle !== 0 && mortelle !== null) {
+          console.log("lost in the speed");
+          document.getElementById('mortellecircle'+mortelle).click();
+        }
+      }else{
+        console.log("of the dawn");
+        if (data[0].blessuremortelle !== 0 && data[0].blessuremortelle !== null) {
+          document.getElementById('mortellecircle'+data[0].blessuremortelle).click();
+        }
       }
   
     }
@@ -722,7 +757,7 @@ getPersonnage(Id_Personnage)
           updatePersonnageField(Id_Personnage, "maxblessuremortelle", maxblessuremortelle);
         }
         blessureClear();
-        blessureDisplay(maxblessurelegere, maxblessuregrave, maxblessuremortelle);
+        blessureDisplay(maxblessurelegere, maxblessuregrave, maxblessuremortelle, legere, grave, mortelle);
       });
     });
 
@@ -745,6 +780,7 @@ getPersonnage(Id_Personnage)
           updatePersonnageField(Id_Personnage, "maxsangfroid", maxsangfroid);
         }
         reserveClear();
+        console.log(effort, sangfroid);
         reservesDisplay(maxeffort, maxsangfroid, effort, sangfroid);
       });
     });

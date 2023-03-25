@@ -7,7 +7,12 @@ var number;
 var rethrows;
 
 function calculate(rethrow){
-    number = parseInt(caracteristique) + parseInt(caracteristiqueMalus) + parseInt(competenceMalus) + parseInt(modifier);
+    
+    number = parseInt(caracteristique) + parseInt(caracteristiqueMalus) + parseInt(competenceMalus);
+    
+    if(modifier != null && modifier != 0){
+        number += parseInt(modifier);
+    }
 
     rethrows = 0;
    switch(competence){
