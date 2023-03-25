@@ -1,3 +1,7 @@
+html{
+  overflow-x: hidden;
+}
+
 .card {
     width: 1200px;
     height: 1700px;
@@ -207,29 +211,10 @@
     overflow: hidden;
 }
   
-  #overlay {
-    height: 100%;
-    width: 100%;
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 999;
-    display: none; /* Hide by default */
-  }
-  
-  #overlay.show {
-    display: block; /* Show when the class is toggled */
-  }
   
   #overlay .content {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    max-height: 90vh;
+    max-height: 100vh;
     overflow-y: none;
   }
 
@@ -248,7 +233,6 @@
   }
 
   .button {
-    background-image: url("../img/modale.png");
     background-size: cover;
     color: #000000;
     font-weight: bold;
@@ -357,9 +341,46 @@
     min-width: 170px;
   }
 
-.rightside{
-  position: absolute;
-  right: 0px;
+  .rightside {
+    position: absolute;
+    top: -50px;
+    left: 0;
+    bottom: 0;
+    width: 30px; /* adjust this to your desired width */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #aaa;
+    transition: all 0.5s ease-in-out;
+    z-index: 9999;
+  }
+  
+  #overlay {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background-color: #aaa;
+    z-index: 99;
+    transition: all 0.5s ease-in-out;
+  }
+
+
+#overlay.show {
+  left: 0;
+}
+
+.rightside.show {
+  left: calc(100% - 20px);
+}
+
+.rightside > .button {
+  border-radius: 30px 30px 30px 30px;
+  height: 100px;
+  background-color: #aaa;
+  outline: none;
+  border: 1px solid #aaa;
 }
 
 .redcross{
