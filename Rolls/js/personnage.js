@@ -277,7 +277,7 @@ function selectNoteCompetence(competence, note) {
   updatePersonnageField(Id_Personnage, competence, note)
 }
 
-  const inputFields = document.querySelectorAll("input");
+  const inputFields = document.querySelectorAll(".rowToUpdate");
   inputFields.forEach(inputField => {
     // Add change event listener to each input field
     inputField.addEventListener("change", function() {
@@ -307,9 +307,6 @@ function updatePersonnageField(id, field, value) {
     console.error(error);
   });
 }
-
-
-
 
 // Replace with the actual ID you want to fetch
 async function getPersonnage(Id_Personnage) {
@@ -685,7 +682,6 @@ getPersonnage(Id_Personnage)
           document.getElementById('legerecircle'+legere).click();
         }
       }else{
-        console.log("of the dawn");
         if (data[0].blessurelegere !== 0 && data[0].blessurelegere !== null) {
           document.getElementById('legerecircle'+data[0].blessurelegere).click();
         }
@@ -698,7 +694,6 @@ getPersonnage(Id_Personnage)
           document.getElementById('gravecircle'+grave).click();
         }
       }else{
-        console.log("of the dawn");
         if (data[0].blessuregrave !== 0 && data[0].blessuregrave !== null) {
           document.getElementById('gravecircle'+data[0].blessuregrave).click();
         }
@@ -710,7 +705,6 @@ getPersonnage(Id_Personnage)
           document.getElementById('mortellecircle'+mortelle).click();
         }
       }else{
-        console.log("of the dawn");
         if (data[0].blessuremortelle !== 0 && data[0].blessuremortelle !== null) {
           document.getElementById('mortellecircle'+data[0].blessuremortelle).click();
         }
@@ -780,7 +774,6 @@ getPersonnage(Id_Personnage)
           updatePersonnageField(Id_Personnage, "maxsangfroid", maxsangfroid);
         }
         reserveClear();
-        console.log(effort, sangfroid);
         reservesDisplay(maxeffort, maxsangfroid, effort, sangfroid);
       });
     });

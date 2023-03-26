@@ -123,6 +123,29 @@ const getCharactersById = (Id_Profil, callback) => {
   });
 };
 
+const getThrows = (lost, callback) => {
+  // Write the SQL query
+  const query = `SELECT personnage.nom, throws.Id_Throws ,throws.diceValues FROM throws Inner Join personnage on personnage.Id_Personnage = throws.Id_Personnage`;
+
+  // Get a connection from the pool and execute the query
+  pool.getConnection((err, connection) => {
+    if (err) {
+      console.error("Error getting connection: " + err.stack);
+      return;
+    }
+
+    connection.query(query, (error, results, fields) => {
+      connection.release(); // Release the connection back to the pool
+
+      if (error) {
+        console.error("Error executing query: " + error.stack);
+        return;
+      }
+      callback(results);
+    });
+  });
+};
+
 const getProfilbyPersonnage = (Id_Personnage, callback) => {
   // Write the SQL query
   const query = `SELECT control.Id_Profil FROM personnage Inner join control on control.Id_Personnage=personnage.Id_Personnage WHERE control.Id_Personnage = ${Id_Personnage}`;

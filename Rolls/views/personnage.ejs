@@ -11,67 +11,6 @@
   <title>Bootstrap Page</title>
 </head>
 <div id="original-content">
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header justify-content-right">
-        <div class="col-1">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        </div>
-        </button>
-      </div>
-    <div class="modal-body">
-    <form>
-    <label for="variable">Select a variable:</label>
-    <select id="variable" name="variable">
-      <option value="puissance">Puissance</option>
-      <option value="precicion">Precision</option>
-      <option value="connaissance">Connaissance</option>
-      <option value="volonte">Volonte</option>
-      <option value="resistance">Resistance</option>
-      <option value="reflexes">Reflexes</option>
-      <option value="perception">Perception</option>
-      <option value="empathie">Empathie</option>
-    </select>
-     <label for="variable2">Select another variable:</label>
-    <select id="variable2" name="variable2">
-      <option value="arts">Arts</option>
-      <option value="animalisme">Animalisme</option>
-      <option value="cite">Cité</option>
-      <option value="faune">Faune</option>
-      <option value="civilisations">Civilisations</option>
-      <option value="montures">Montures</option>
-      <option value="relationnel">Relationnel</option>
-      <option value="pistage">Pistage</option>
-      <option value="soins">Soins</option>
-      <option value="territoire">Territoire</option>
-      <option value="adresse">Adresse</option>
-      <option value="athletisme">Athlétisme</option>
-      <option value="armurerie">Armurerie</option>
-      <option value="discretion">Discrétion</option>
-      <option value="artisanat">Artisanat</option>
-      <option value="flore">Flore</option>
-      <option value="mecanisme">Mécanisme</option>
-      <option value="vigilance">Vigilance</option>
-      <option value="runes">Runes</option>
-      <option value="voyage">Voyage</option>
-      <option value="bouclier">Bouclier</option>
-      <option value="eclats">Éclat</option>
-      <option value="cac">CAC</option>
-      <option value="lunes">Lunes</option>
-      <option value="lancer">Lancer</option>
-      <option value="mythes">Mythes</option>
-      <option value="melee">Mêlée</option>
-      <option value="pantheons">Panthéons</option>
-      <option value="tir">Tir</option>
-      <option value="rituels">Rituels</option>
-    </select>
-    <button type="submit">Submit</button>
-  </form>
-      </div>
-    </div>
-  </div>
-</div>
   <body>
     <div class="container-fluid">
       <div class="row">
@@ -81,30 +20,30 @@
               <div class="row nomage justify-content-center">
                 <div class="col-3 row">
                   <p>Nom :</p>
-                  <input id="nom" name="nom"/>
+                  <input class="rowToUpdate" id="nom" name="nom"/>
                 </div>
                 <div class="col-3 row age">
-                  <input id="age" name="age" />
+                  <input class="rowToUpdate" id="age" name="age" />
                   <p>: Âge</p>
                 </div>
               </div>
               <div class="row justify-content-center">
                 <div class="col-5 row">
                   <p>Genre :</p>
-                  <input id="genre" name="genre" />
+                  <input class="rowToUpdate" id="genre" name="genre" />
                 </div>
                 <div class="col-5 row instinct">
-                  <input id="instinct" name="instinct" />
+                  <input class="rowToUpdate" id="instinct" name="instinct" />
                   <p>: Instinct</p>
                 </div>
               </div>
               <div class="row justify-content-center">
                 <div class="col-6 row">
                   <p>Signe Astrologique :</p>
-                  <input id="signeastro" name="signeastro" />
+                  <input class="rowToUpdate" id="signeastro" name="signeastro" />
                 </div>
                 <div class="col-6 row origine">
-                  <input id="origine" name="origine" />
+                  <input class="rowToUpdate" id="origine" name="origine" />
                   <p>: Origine</p>
                 </div>
               </div>
@@ -125,9 +64,9 @@
               <div class="row justify-content-center pointsexp">
                 <div class="col-6 row"></div>
                 <div class="col-6 row exp">
-                  <input id="depensee" name="depensee" />
+                  <input class="rowToUpdate" id="depensee" name="depensee" />
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  <input id="totale" name="totale" />
+                  <input class="rowToUpdate" id="totale" name="totale" />
                 </div>
               </div>
               <div class="row justify-content-center caracteristiques">
@@ -236,26 +175,26 @@
                 <div class="col-2 text-center">
                   <div class="d-flex align-items-center justify-content-center">
                     <h5 class="mr-3">Malus</h5>
-                    <input class="malus" id="malusphysique" name="malusphysique"
+                    <input class="malus rowToUpdate" id="malusphysique" name="malusphysique"
                     />
                   </div>
                 </div>
                 <div class="col-2 text-center">
                   <div class="d-flex align-items-center justify-content-center">
                     <h5 class="mr-3">Malus</h5>
-                    <input class="malus" id="malusmanuel" name="malusmanuel" />
+                    <input class="malus rowToUpdate" id="malusmanuel" name="malusmanuel" />
                   </div>
                 </div>
                 <div class="col-2 text-center">
                   <div class="d-flex align-items-center justify-content-center">
                     <h5 class="mr-3">Malus</h5>
-                    <input class="malus" id="malussocial" name="malussocial" />
+                    <input class="malus rowToUpdate" id="malussocial" name="malussocial" />
                   </div>
                 </div>
                 <div class="col-2 text-center">
                   <div class="d-flex align-items-center justify-content-center">
                     <h5 class="mr-3">Malus</h5>
-                    <input class="malus" id="malusmental" name="malusmental" />
+                    <input class="malus rowToUpdate" id="malusmental" name="malusmental" />
                   </div>
                 </div>
               </div>
@@ -421,7 +360,7 @@
                   <div class="col-2 text-center">
                     <div class="d-flex align-items-center justify-content-center">
                       <h5 class="mr-3">Malus</h5>
-                      <input class="malus" id="malushumain" name="malushumain"/>
+                      <input class="malus rowToUpdate" id="malushumain" name="malushumain"/>
                     </div>
                   </div>
                 </div>
@@ -429,7 +368,7 @@
                   <div class="col-2 text-center">
                     <div class="d-flex align-items-center justify-content-center">
                       <h5 class="mr-3">Malus</h5>
-                      <input class="malus" id="malusanimal" name="malushumain"/>
+                      <input class="malus rowToUpdate" id="malusanimal" name="malushumain"/>
                     </div>
                   </div>
                 </div>
@@ -587,7 +526,7 @@
                   <div class="col-2 text-center">
                     <div class="d-flex align-items-center justify-content-center">
                       <h5 class="mr-3">Malus</h5>
-                      <input class="malus" id="malusoutils" name="malusoutils"/>
+                      <input class="malus rowToUpdate" id="malusoutils" name="malusoutils"/>
                     </div>
                   </div>
                 </div>
@@ -595,7 +534,7 @@
                   <div class="col-2 text-center">
                     <div class="d-flex align-items-center justify-content-center">
                       <h5 class="mr-3">Malus</h5>
-                      <input class="malus" id="malusterres" name="malusterres"/>
+                      <input class="malus rowToUpdate" id="malusterres" name="malusterres"/>
                     </div>
                   </div>
                 </div>
@@ -753,7 +692,7 @@
                   <div class="col-2 text-center">
                     <div class="d-flex align-items-center justify-content-center">
                       <h5 class="mr-3">Malus</h5>
-                      <input class="malus" id="malusarme" name="malusarme"/>
+                      <input class="malus rowToUpdate" id="malusarme" name="malusarme"/>
                     </div>
                   </div>
                 </div>
@@ -761,7 +700,7 @@
                   <div class="col-2 text-center">
                     <div class="d-flex align-items-center justify-content-center">
                       <h5 class="mr-3">Malus</h5>
-                      <input class="malus" id="malusinconnu" name="malusinconnu"/>
+                      <input class="malus rowToUpdate" id="malusinconnu" name="malusinconnu"/>
                     </div>
                   </div>
                 </div>
@@ -835,26 +774,22 @@
               </div>
             </div>
           </div>
-       
-            
-            
       </div>
-      
-    </div>
-    <div id="rightside" class="rightside">
-      <button class="button" id="open-overlay-btn"> ></button>
     </div>
   </div>
-  
+</div>
+<div id="rightside" class="rightside">
+  <button class="button" id="open-overlay-btn"> ></button>
+</div>
 </div>
 
-</div>
-
-<div id="overlay">
-  <main>
+  <div id="overlay">
     <div id="content" class="content modal-content">
 		  <div id="ThreeJS" style="position: absolute; left:0px; top:0px"></div>
       <div id="ui-controls" class="ui-controls">
+        <div id="rollingbox" class="rollingbox">
+          
+        </div>
         <select name="caracteristique" id="caracteristique">
           <option value="puissance" name="puissance">Puissance</option>
           <option value="precision" name="precision">Précision</option>
@@ -901,10 +836,10 @@
         <div class="score">Score: <span id="score-result"></span></div>
         <ul class="tips"></ul>
         <button id="roll-btn" class="button">Throw the dice</button>
+        
       </div>
     </div>
-  </main>
-</div>
+  </div>
 </body>
 </html>
 
