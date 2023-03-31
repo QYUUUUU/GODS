@@ -129,13 +129,17 @@ function init()
     scene.add(light);
 
 
-	// FLOOR
-	var floorMaterial = new THREE.MeshPhongMaterial( { color: '#232323', side: THREE.DoubleSide } );
-	var floorGeometry = new THREE.PlaneGeometry(30, 30, 10, 10);
-	var floor = new THREE.Mesh(floorGeometry, floorMaterial);
-	floor.receiveShadow  = true;
-	floor.rotation.x = Math.PI / 2;
-	scene.add(floor);
+    var textureLoader = new THREE.TextureLoader();
+
+    // Remplacez 'path/to/image.jpg' par le chemin de votre image
+    textureLoader.load('../img/floorArt.png', function (texture) {
+        var floorMaterial = new THREE.MeshPhongMaterial({map: texture, side: THREE.DoubleSide});
+        var floorGeometry = new THREE.PlaneGeometry(50, 50, 10, 10);
+        var floor = new THREE.Mesh(floorGeometry, floorMaterial);
+        floor.receiveShadow = true;
+        floor.rotation.x = Math.PI / 2;
+        scene.add(floor);
+    });
    
 	// CUSTOM //
 	////////////

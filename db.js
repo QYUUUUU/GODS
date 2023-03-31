@@ -4,18 +4,21 @@ const cors = require('cors');
 const path = require('path');
 const crypto = require('crypto');
 const session = require('express-session');
+require('dotenv').config();
 
 
 // Create a MySQL connection pool
 const pool = mysql.createPool({
   connectionLimit: 40,
-  host: 'localhost',
-  user: 'root',
-  password: '',
-  database: 'godzila'
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME
 });
 
-const leseletlepoivre = 'HMMMhmhmmhmhmhmhmhmhmh\%\%X0X0\%\%hmhmmhmjaimeca';
+const leseletlepoivre = process.env.SALT;
+
+
 // Create an Express app
 const app = express();
 

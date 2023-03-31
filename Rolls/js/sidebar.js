@@ -39,8 +39,7 @@ let lastId = 0;
 function displayDiceThrow(diceThrow) {
   const throwDiv = document.createElement("div");
   throwDiv.className = "throw-box";
-
-  console.log(diceThrow);
+  
   // Parse the JSON string into an array
   const diceValuesArray = JSON.parse(diceThrow.diceValues);
 
