@@ -1,23 +1,36 @@
-version: '3'
+version: '3.9'
+
 services:
   db:
     image: mysql:latest
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-    ports:
-      - 3306:3306
+      MYSQL_DATABASE: godzila
+      MYSQL_USER: root
+      MYSQL_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
     volumes:
-      - dbdata:/var/lib/mysql
+      - db_data:/var/lib/mysql
+    networks:
+      - app-network
+
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
+    depends_on:
+      - db
+    restart: always
     environment:
       PMA_HOST: db
       PMA_USER: root
-      PMA_PASSWORD: ${PHPMYADMIN_PASSWORD}
+      PMA_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     ports:
-      - 8080:80
-    depends_on:
-      - db
+      - '8080:80'
+    networks:
+      - app-network
+
 volumes:
-  dbdata:
+  db_data:
+
+networks:
+  app-network:
+    driver: bridge
