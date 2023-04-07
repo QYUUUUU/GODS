@@ -13,6 +13,7 @@ html{
   background-repeat: no-repeat;
 }
 
+
 .nomage {
   margin-top: 200px;
 }
@@ -406,4 +407,23 @@ canvas {
 .diceResult{
   width: 40px;
   height: 40px;
+}
+
+.connexioninput{
+  width: 200px;
+  justify-content: center;
+  display:inline;
+  border: unset;
+  border-bottom: solid 1px white;
+  outline: none;
+  background-color: #ffffff;
+}
+
+.cardconnexion{
+  width: 400px;
+  height: 500px;
+  text-align: center;
+  background-color: #212529;
+  border-radius: 10px;
+  color: #ffffff;
 }
